@@ -1,17 +1,18 @@
 import { createBrowserRouter } from "react-router";
-import HomeLayout from "../Layouts/HomeLayout";
-import HomePage from "../../Pages/HomePage/HomePage";
-import AllBooks from "../../Pages/AllBooks/AllBooks";
-import LoginPage from "../../Pages/LoginPage/LoginPage";
-import RegisterPage from "../../Pages/RegisterPage/RegisterPage";
-import DashboardPage from "../../Pages/Dashboard/DashboardPage";
-import RequestDeliveryPage from "../../Pages/RequestDelivery/RequestDeliveryPage";
+
+import HomePage from "../Pages/HomePage/HomePage";
+import AllBooks from "../Pages/AllBooks/AllBooks";
+import LoginPage from "../Pages/LoginPage/LoginPage";
+import RegisterPage from "../Pages/RegisterPage/RegisterPage";
+import DashboardPage from "../Pages/Dashboard/DashboardPage";
+import RequestDeliveryPage from "../Pages/RequestDelivery/RequestDeliveryPage";
+import MainLayout from "../Layouts/MainLayout";
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <HomeLayout></HomeLayout>,
+        element: <MainLayout></MainLayout>,
         children: [
             {
                 index: true,
