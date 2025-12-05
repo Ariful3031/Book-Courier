@@ -18,7 +18,7 @@ export default function LoginPage() {
       .then(result => {
         console.log(result.user)
         if (result.user) {
-          setUser(result.user)
+          // setUser(result.user)
           toast.success('login successfull')
         }
       })

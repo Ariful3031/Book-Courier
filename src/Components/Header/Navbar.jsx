@@ -5,7 +5,7 @@ import logoImg from '../../assets/screen book logo.png'
 import useAuth from '../Hooks/useAuth';
 
 export default function Navbar() {
-    const { user } = useAuth();
+    const { user,logout } = useAuth();
 
     const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
 
@@ -17,6 +17,14 @@ export default function Navbar() {
 
     const handleTheme = (checked) => {
         setTheme(checked ? "dark" : "light")
+    }
+
+    const handleLogOut =()=>{
+        logout()
+        .then()
+        .catch(error=>{
+            console.log(error)
+        })
     }
 
     const Links = <>
@@ -52,7 +60,7 @@ export default function Navbar() {
                     <input onChange={(e) => handleTheme(e.target.checked)} type="checkbox" className="toggle theme-controller" />
                 </div>
                 {
-                    user ? <button className='btn'>Log Out</button> : <Link to='/login' className="btn">Login</Link>
+                    user ? <button onClick={handleLogOut} className='btn'>Log Out</button> : <Link to='/login' className="btn">Login</Link>
                 }
 
             </div>

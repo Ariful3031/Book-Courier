@@ -10,7 +10,7 @@ export default function GoogleLoginPage() {
             .then(result => {
                 console.log(result.user)
                 if (result.user.email) {
-                    setUser(result.user)
+                    // setUser(result.user)
                     toast.success('login successful')
                 }
 

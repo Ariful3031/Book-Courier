@@ -19,7 +19,7 @@ export default function RegisterPage() {
             .then(result => {
                 console.log(result.user)
                 if (result.user) {
-                    setUser(result.user)
+                    // setUser(result.user)
                     toast.success('login successfull')
                 }
             })
