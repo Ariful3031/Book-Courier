@@ -1,17 +1,29 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from "react-router";
 import logoImg from '../../assets/screen book logo.png'
+import useAuth from '../Hooks/useAuth';
 
 export default function Navbar() {
-  
+    const { user } = useAuth();
+
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+
+    useEffect(() => {
+        const html = document.querySelector('html')
+        html.setAttribute("data-theme", theme)
+        localStorage.setItem("theme", theme)
+    }, [theme])
+
+    const handleTheme = (checked) => {
+        setTheme(checked ? "dark" : "light")
+    }
+
     const Links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/books'>Books</NavLink></li>
         <li><NavLink to='/request-delivery'>Request Delivery</NavLink></li>
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-        <li><NavLink to='/login'>Login</NavLink></li>
-        <li><NavLink to='/register'>Register</NavLink></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -28,7 +40,7 @@ export default function Navbar() {
                         }
                     </ul>
                 </div>
-                <Link to='/'> <img className="w-[100px] h-10 btn-ghost text-xl" src={logoImg} alt="" /></Link>
+                <Link to='/'> <img className="w-[100px] h-10 btn-ghost rounded-sm text-xl" src={logoImg} alt="" /></Link>
             </div>
             <div className="navbar-center hidden md:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -36,7 +48,13 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login' className="btn">Login</Link>
+                <div className='mr-2'>
+                    <input onChange={(e) => handleTheme(e.target.checked)} type="checkbox" className="toggle theme-controller" />
+                </div>
+                {
+                    user ? <button className='btn'>Log Out</button> : <Link to='/login' className="btn">Login</Link>
+                }
+
             </div>
         </div>
     )

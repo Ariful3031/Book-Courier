@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router";
 
 import HomePage from "../Pages/HomePage/HomePage";
 import AllBooks from "../Pages/AllBooks/AllBooks";
-import LoginPage from "../Pages/LoginPage/LoginPage";
-import RegisterPage from "../Pages/RegisterPage/RegisterPage";
+import LoginPage from "../Pages/AuthenticationPage/LoginPage/LoginPage";
+import RegisterPage from "../Pages/AuthenticationPage/RegisterPage/RegisterPage";
 import DashboardPage from "../Pages/Dashboard/DashboardPage";
 import RequestDeliveryPage from "../Pages/RequestDelivery/RequestDeliveryPage";
 import MainLayout from "../Layouts/MainLayout";
