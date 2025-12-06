@@ -1,0 +1,112 @@
+[
+{
+"_id": "679a5e4fd1a1c001a0010011",
+"image_URL": "[https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ1AJMUjvh5in2z8uWN5qcOaoq3vKNgRqIWA&s](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ1AJMUjvh5in2z8uWN5qcOaoq3vKNgRqIWA&s)",
+"title": "Mastering React",
+"writer": "John Doe",
+"price": 29.99,
+"description": "A complete guide to building modern web apps using React.",
+"publish_Date": "2023-02-15",
+"rating": 4.5,
+"category": "Web Development"
+},
+{
+"_id": "679a5e4fd1a1c001a0010012",
+"image_URL": "https://www.oreilly.com/covers/urn:orm:book:9781394263219/400w/",
+"title": "JavaScript Essentials",
+"writer": "Sarah Thompson",
+"price": 24.50,
+"description": "Fundamentals of JavaScript explained with real examples.",
+" publish_Date  ": "2022-11-05",
+"rating": 4.2,
+"category": "Programming"
+},
+{
+"_id": "679a5e4fd1a1c001a0010013",
+"image_URL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1pEGDFSHFhBUw1dYTc3H_FLx9cdqEAFMoCw&s",
+"title": "Node.js in Depth",
+"writer": "Michael Lee",
+"price": 31.00,
+"description": "A deep dive into backend development using Node.js.",
+"publish_Date": "2021-09-10",
+"rating": 4.7,
+"category": "Backend Development"
+},
+{
+"_id": "679a5e4fd1a1c001a0010014",
+" image_URL": "https://www.classcentral.com/course/youtube-mongodb-tutorial-for-beginners-92664",
+"title": "MongoDB for Beginners",
+"writer": "Emily Carter",
+"price": 27.00,
+"description": "Learn how to build NoSQL databases using MongoDB.",
+" publish_Date  ": "2023-01-22",
+"rating": 4.4,
+"category": "Database"
+},
+{
+"_id": "679a5e4fd1a1c001a0010015",
+" image_URL": "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190531175841/Full-Stack-Web-Developer.png",
+"title": "Full-Stack Developer Guide",
+"writer": "David Miller",
+"price": 39.99,
+"description": "End-to-end guide to full-stack development.",
+" publish_Date  ": "2024-03-11",
+"rating": 4.8,
+"category": "Full Stack"
+},
+{
+"_id": "679a5e4fd1a1c001a0010016",
+" image_URL": "https://www.udemy.com/course/complete-html5-css3-course-newbie-to-pro/?srsltid=AfmBOorRnYjuBbyeAyLLnQlamIk7X9QM2p8yDK_tTtcs4Z54h6jsudZZ",
+"title": "HTML & CSS Pro",
+"writer": "Linda Brown",
+"price": 18.75,
+"description": "Design beautiful and responsive websites.",
+" publish_Date  ": "2020-07-30",
+"rating": 4.0,
+"category": "UI/Frontend"
+},
+{
+"_id": "679a5e4fd1a1c001a0010017",
+"image_URL": "https://d2sofvawe08yqg.cloudfront.net/advancedtypescript/s_hero2x?1620627527",
+"title": "Advanced TypeScript",
+"writer": "Robert King",
+"price": 34.20,
+"description": "Master TypeScript for scalable applications.",
+" publish_Date  ": "2023-10-12",
+"rating": 4.6,
+"category": "Programming"
+},
+{
+"_id": "679a5e4fd1a1c001a0010018",
+" image_URL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAZwdtBJkBTZHh6bsKxvtyaINWWS-bATlnyA&s",
+"title": "API Design Patterns",
+"writer": "Sophia Green",
+"price": 28.90,
+"description": "Modern API design techniques and best practices.",
+" image_URL  ": "2022-04-18",
+"rating": 4.3,
+"category": "Software Architecture"
+},
+{
+"_id": "679a5e4fd1a1c001a0010019",
+" image_URL": "https://reactz2h.com/img/cover.png",
+"title": "React.js Zero to Hero",
+"writer": "Mark Wilson",
+"price": 32.00,
+"description": "From beginner to advanced React.js development.",
+" publish_Date  ": "2024-01-05",
+"rating": 4.9,
+"category": "Web Development"
+},
+{
+"_id": "679a5e4fd1a1c001a001001a",
+" image_URL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ftsZZd6zGA7oRkJFzQfZ2osy9It4UcA7yw&s",
+"title": "Database Systems Explained",
+"writer": "Amanda Scott",
+"price": 26.40,
+"description": "Covers SQL, NoSQL, indexing, and database design.",
+" publish_Date  ": "2021-12-01",
+"rating": 4.1,
+"category": "Database"
+}
+]

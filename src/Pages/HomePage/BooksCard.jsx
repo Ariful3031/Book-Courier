@@ -1,0 +1,33 @@
+import React from 'react'
+import { FcRating } from 'react-icons/fc';
+import { IoLogoUsd } from 'react-icons/io';
+import { MdOutlineStar } from 'react-icons/md';
+import { Link } from 'react-router';
+
+export default function BooksCard({ book }) {
+    console.log(book)
+    return (
+        <div className='p-5 bg-[#DCFCE7] rounded-lg'>
+            <img className='w-full h-[300px] rounded-lg object-cover' src={book.image_URL} alt="" />
+            <h2 className='text-xl font-semibold mt-5 mb-2'>{book.title}</h2>
+            <div className='flex justify-between'>
+                <div className='flex items-center px-3 py-1 bg-amber-200 rounded-xl'>
+                    <h3 className=''>Price : {book.price}</h3>
+                    <IoLogoUsd />
+                </div>
+                <div className='flex items-center gap-2 bg-[#00D390] px-2 rounded-lg '>
+                    <div className='flex'>
+                        <MdOutlineStar />
+                        <MdOutlineStar />
+                        <MdOutlineStar />
+                        <MdOutlineStar />
+                        <MdOutlineStar />
+                    </div>
+                    <p>{book.rating}</p>
+                </div>
+            </div>
+            <Link className='btn bg-[#23BE0A] text-white w-full py-2 mt-3 rounded-lg'>View Details</Link>
+
+        </div>
+    )
+}
