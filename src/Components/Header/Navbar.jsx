@@ -60,7 +60,7 @@ export default function Navbar() {
                     <input onChange={(e) => handleTheme(e.target.checked)} type="checkbox" className="toggle theme-controller" />
                 </div>
                 {
-                    user ? <button onClick={handleLogOut} className='btn'>Log Out</button> : <Link to='/login' className="btn">Login</Link>
+                    user ? <button onClick={handleLogOut} className='btn bg-[#23BE0A] text-white px-3 rounded-lg'>Log Out</button> : <Link to='/login' className="btn bg-[#23BE0A] text-white px-3 rounded-lg">Login</Link>
                 }
 
             </div>

@@ -6,7 +6,7 @@ import Footer from '../Components/Footer/Footer'
 
 export default function MainLayout() {
   return (
-    <div className='max-w-7xl mx-auto'>
+    <div className='w-11/12 max-w-7xl mx-auto'>
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>

@@ -14,8 +14,8 @@ export default function LatestBook() {
 
     return (
         <div>
-            <h1 className='text-4xl font-bold my-5  text-black text-center'>Latest Books</h1>
-            <div className='grid grid-cols-4 gap-5'>
+            <h1 className='text-4xl font-bold mt-5 mb-10 dark:text-white  text-black text-center'>Latest Books</h1>
+            <div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
                 {
                     latestBooks.map(book => <BooksCard key={book._id} book={book}></BooksCard>)
                 }
