@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { MdOutlineStar } from 'react-icons/md'
+import { useParams } from 'react-router'
 
 export default function BookDetailsPage() {
-    const { register, handleSubmit, formState: { errors },reset } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const [book, setBook] = useState([])
+    console.log(book)
 
-    const data = {
-        "_id": "679a5e4fd1a1c001a0010012",
-        "image_URL": "https://www.oreilly.com/covers/urn:orm:book:9781394263219/400w/",
-        "title": "JavaScript Essentials",
-        "writer": "Sarah Thompson",
-        "price": 24.50,
-        "description": "Fundamentals of JavaScript explained with real examples.",
-        " publish_Date  ": "2022-11-05",
-        "rating": 4.2,
-        "category": "Programming"
-    }
+    const { id } = useParams();
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/books/${id}`, {
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                setBook(data)
+
+            })
+    }, [id])
+    const { image_URL, title,writer_image,writer,rating,description,publisher_name,publishDate,languese,price
+ } = book;
+ 
 
     const handleRegistration = (data) => {
         console.log(data)
@@ -27,16 +35,16 @@ export default function BookDetailsPage() {
 
         <div className=' grid grid-cols-12 gap-5 dark:bg-yellow-500'>
 
-            <div className='w-full h-[500px] p-5 col-span-4'>
-                <img className='w-full h-full  border-none' src="https://www.oreilly.com/covers/urn:orm:book:9781394263219/400w/" alt="" />
+            <div className='w-full h-[500px] p-5 col-span-5'>
+                <img className='w-full h-full  border-none' src={image_URL} alt="" />
             </div>
             {/* right sight  */}
-            <div className=' w-full col-span-8 p-5'>
-                <h1 className='text-3xl font-semibold dark:text-white my-5'>JavaScript Essentials</h1>
+            <div className=' w-full col-span-7 p-5'>
+                <h1 className='text-3xl font-semibold dark:text-white my-5'>{title}</h1>
                 <div className='flex items-center gap-5'>
                     {/* writer image and name */}
-                    <img className='w-15 h-15 rounded-full' src="https://thumbs.dreamstime.com/b/writer-work-handsome-young-sitting-table-writing-something-his-sketchpad-31869272.jpg" alt="" />
-                    <h2 className='text-2xl font-medium dark:text-white'>Sarah Thompson</h2>
+                    <img className='w-15 h-15 rounded-full' src={writer_image} alt="" />
+                    <h2 className='text-2xl font-medium dark:text-white'>{writer}</h2>
                 </div>
                 <div className='items-center mt-3 gap-2 inline-flex bg-[#00D390] px-2 rounded-lg dark:text-black '>
                     <div className='flex'>
@@ -46,16 +54,16 @@ export default function BookDetailsPage() {
                         <MdOutlineStar />
                         <MdOutlineStar />
                     </div>
-                    <p>4.2</p>
+                    <p>{rating}</p>
                 </div>
                 <p className='text-xl mt-1 font-medium'>description:  </p>
-                <span className='text-[16px]'>Fundamentals of JavaScript explained with real examples.</span>
+                <span className='text-[16px]'>{description}</span>
 
-                <p className='text-xl mt-1 font-medium'>publisherName: <span className='text-[16px]'>Ariful Islam</span></p>
-                <p className='text-xl mt-1 font-medium'>First Publish : <span className='text-[16px]'>2022-11-05</span></p>
-                <p className='text-xl mt-1 font-medium'>Languese: <span className='text-[16px]'>English</span></p>
-                <p className='text-xl mt-1 font-medium'>Price: <span className='text-[16px]'>24.50 $</span></p>
-                <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-[#23BE0A] text-white px-3 rounded-lg">Order Now</button>
+                <p className='text-xl mt-1 font-medium'>publisherName: <span className='text-[16px]'>{publisher_name}</span></p>
+                <p className='text-xl mt-1 font-medium'>First Publish : <span className='text-[16px]'>{publishDate}</span></p>
+                <p className='text-xl mt-1 font-medium'>Languese: <span className='text-[16px]'>{languese}</span></p>
+                <p className='text-xl mt-1 font-medium'>Price: <span className='text-[16px]'>{price}</span></p>
+                <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-[#23BE0A] text-white dark:border-none px-3 rounded-lg">Order Now</button>
 
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
                 {/* <button className="btn" onClick={()=>document.getElementById('my_modal_5').showModal()}>open modal</button> */}

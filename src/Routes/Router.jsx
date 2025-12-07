@@ -40,8 +40,9 @@ export const router = createBrowserRouter([
                 Component: RequestDeliveryPage
             },
             {
-                path:'/book-details',
-                Component: BookDetailsPage
+                path:'/book/details/:id',
+                Component: BookDetailsPage,
+                  loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`)
             },
         ]
     },

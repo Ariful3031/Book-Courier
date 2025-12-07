@@ -27,7 +27,7 @@ export default function BooksCard({ book }) {
                     <p>{book.rating}</p>
                 </div>
             </div>
-            <Link to='/book-details' className='btn bg-[#23BE0A] text-white w-full py-2 border-none mt-3 rounded-lg'>Book Details</Link>
+            <Link to={`/book/details/${book._id}`} className='btn bg-[#23BE0A] text-white w-full py-2 border-none mt-3 rounded-lg'>Book Details</Link>
 
         </div>
     )
