@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css'
 
 export default function Coverage() {
     const [serviceCenters, setServiceCenters] = useState([]);
-        console.log(serviceCenters)
+        // console.log(serviceCenters)
     
         useEffect(() => {
             fetch("/services-Center.json")

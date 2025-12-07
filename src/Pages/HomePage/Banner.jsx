@@ -8,7 +8,7 @@ import { Autoplay } from 'swiper/modules';
 
 export default function Banner() {
     const [books, setBooks] = useState([]);
-    console.log(books)
+    // console.log(books)
     useEffect(() => {
         fetch("/data.json")
             .then(res => res.json())

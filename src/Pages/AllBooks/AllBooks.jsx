@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import BooksCard from '../HomePage/Bookscard';
+import useAxiosSecure from '../../Components/Hooks/useAxiosSecure';
 
 export default function AllBooks() {
+  const axiosSecure = useAxiosSecure();
 
-    const [AllBooks, setAllBooks] = useState([]);
-      console.log(AllBooks)
-  
-      useEffect(() => {
-          fetch("/data.json")
-              .then(res => res.json())
-              .then(data => setAllBooks(data))
-      }, [])
+  const [AllBooks, setAllBooks] = useState([]);
+  // console.log(AllBooks)
+
+  useEffect(() => {
+    const getData = async () => {
+      const result = await axiosSecure('/books')
+      // console.log(result.data)
+      setAllBooks(result.data)
+    }
+    getData();
+  }, [axiosSecure])
 
   return (
     <div>

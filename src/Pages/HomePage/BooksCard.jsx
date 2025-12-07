@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 export default function BooksCard({ book }) {
 
-    console.log(book)
+    // console.log(book)
     return (
         <div className='p-5 bg-[#DCFCE7] rounded-lg flex flex-col'>
             <img className='w-full h-[250px] rounded-lg object-cover' src={book.image_URL} alt="" />

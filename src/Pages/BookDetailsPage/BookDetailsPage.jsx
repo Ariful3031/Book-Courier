@@ -20,12 +20,14 @@ export default function BookDetailsPage() {
     const handleRegistration = (data) => {
         console.log(data)
         reset();
+
+        document.getElementById('my_modal_5').close();
     }
     return (
 
-        <div className=' grid grid-cols-12 gap-5 bg-gray-100'>
+        <div className=' grid grid-cols-12 gap-5 dark:bg-yellow-500'>
 
-            <div className='w-full h-[500px] col-span-4'>
+            <div className='w-full h-[500px] p-5 col-span-4'>
                 <img className='w-full h-full  border-none' src="https://www.oreilly.com/covers/urn:orm:book:9781394263219/400w/" alt="" />
             </div>
             {/* right sight  */}
@@ -58,7 +60,7 @@ export default function BookDetailsPage() {
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
                 {/* <button className="btn" onClick={()=>document.getElementById('my_modal_5').showModal()}>open modal</button> */}
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                    <div className="modal-box">
+                    <div className="modal-box dark:bg-white">
 
 
                         <form
@@ -67,34 +69,34 @@ export default function BookDetailsPage() {
                             <fieldset className="fieldset">
                                 {/* Name */}
                                 <label className="label font-semibold text-black">Name</label>
-                                <input type="text" className="input w-full" {...register('name', { required: true })} placeholder="Your Name" />
+                                <input type="text" className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('name', { required: true })} placeholder="Your Name" />
                                 {errors.name?.type === "required" && <p className='text-red-500'>name is required.</p>
                                 }
                                 {/* Address */}
                                 <label className="label font-semibold text-black">Address</label>
-                                <input type="text" className="input w-full" {...register('address', { required: true })} placeholder="Your address" />
+                                <input type="text" className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('address', { required: true })} placeholder="Your address" />
                                 {errors.name?.type === "required" && <p className='text-red-500'>address is required.</p>
                                 }
                                 {/* Phone Number */}
                                 <label className="label font-semibold text-black">Phone Number</label>
-                                <input type="number" className="input w-full" {...register('Phone Number', { required: true })} placeholder="Your Phone Number" />
+                                <input type="number" className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('Phone Number', { required: true })} placeholder="Your Phone Number" />
                                 {errors.name?.type === "required" && <p className='text-red-500'>Phone Number is required.</p>
                                 }
 
                                 {/* email */}
                                 <label className="label font-semibold text-black">Email</label>
-                                <input type="email" className="input w-full" {...register('email', { required: true })} placeholder="Email" />
+                                <input type="email" className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('email', { required: true })} placeholder="Email" />
                                 {errors.email?.type === "required" && <p className='text-red-500'>Email is required.</p>
                                 }
                                 {/* button */}
-                                <button className="btn bg-[#23BE0A] text-white px-3 rounded-lg">Place Order</button>
+                                <button className="btn bg-[#23BE0A] dark:border-none text-white px-3 rounded-lg">Place Order</button>
                             </fieldset>
                         </form>
 
                         <div className="modal-action">
                             <form method="dialog">
                                 {/* if there is a button in form, it will close the modal */}
-                                <button className="btn bg-red-500 text-white px-3 rounded-lg">Close</button>
+                                <button className="btn dark:border-none bg-red-500 text-white px-3 rounded-lg">Close</button>
                             </form>
                         </div>
                     </div>

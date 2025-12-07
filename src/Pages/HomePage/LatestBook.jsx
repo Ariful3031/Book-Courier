@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
 
 import BooksCard from './Bookscard';
+import useAxiosSecure from '../../Components/Hooks/useAxiosSecure';
 
 export default function LatestBook() {
+    const axiosSecure = useAxiosSecure();
     const [latestBooks, setLatestBooks] = useState([]);
-    console.log(latestBooks)
+    // console.log(latestBooks)
 
-    useEffect(() => {
-        fetch("/data.json")
-            .then(res => res.json())
-            .then(data => setLatestBooks(data))
-    }, [])
+  useEffect(() => {
+      const getData = async () => {
+        const result = await axiosSecure('/books')
+        // console.log(result.data)
+        setLatestBooks(result.data)
+      }
+      getData();
+    }, [axiosSecure])
 
     return (
         <div>
