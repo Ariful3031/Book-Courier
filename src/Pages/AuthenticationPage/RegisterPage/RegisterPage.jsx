@@ -75,7 +75,7 @@ export default function RegisterPage() {
                                 errors.password?.type === "pattern" && <p className='text-red-500'>Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, and one special character.</p>
                             }
                             {/* button */}
-                            <button className="btn btn-neutral mt-4">register</button>
+                            <button className="btn bg-[#23BE0A] text-white px-3 rounded-lg">register</button>
                         </fieldset>
                     </form>
                     <GoogleLoginPage></GoogleLoginPage>

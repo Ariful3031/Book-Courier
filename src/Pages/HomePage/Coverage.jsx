@@ -50,12 +50,12 @@ export default function Coverage() {
                 </form>
             </div>
             {/*  */}
-            <div className='border w-full h-[300px] sm:h-[400px] md:h-[800px]'>
+            <div className='border w-full h-[300px] sm:h-[90vh] md:h-[90vh]'>
                 <MapContainer
                     center={position}
                     zoom={8}
                     scrollWheelZoom={false}
-                    className='h-[300px] sm:h-[400px] md:h-[800px]'
+                    className='h-[300px] sm:h-[90vh] md:h-[90vh]'
                     ref={mapRef}
                 >
                     <TileLayer

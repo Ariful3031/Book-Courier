@@ -7,6 +7,7 @@ import RegisterPage from "../Pages/AuthenticationPage/RegisterPage/RegisterPage"
 import DashboardPage from "../Pages/Dashboard/DashboardPage";
 import RequestDeliveryPage from "../Pages/RequestDelivery/RequestDeliveryPage";
 import MainLayout from "../Layouts/MainLayout";
+import BookDetailsPage from "../Pages/BookDetailsPage/BookDetailsPage";
 
 
 export const router = createBrowserRouter([
@@ -35,8 +36,12 @@ export const router = createBrowserRouter([
                 Component: RegisterPage
             },
             {
-                path:'request-delivery',
+                path:'/request-delivery',
                 Component: RequestDeliveryPage
+            },
+            {
+                path:'/book-details',
+                Component: BookDetailsPage
             },
         ]
     },

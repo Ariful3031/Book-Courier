@@ -2,6 +2,7 @@ import React from 'react'
 import Banner from './Banner'
 import LatestBook from './LatestBook'
 import Coverage from './Coverage'
+import WhyChooseUs from './WhyChooseUs'
 
 export default function HomePage() {
   return (
@@ -9,6 +10,7 @@ export default function HomePage() {
       <Banner></Banner>
       <LatestBook></LatestBook>
       <Coverage></Coverage>
+      <WhyChooseUs></WhyChooseUs>
     </div>
   )
 }

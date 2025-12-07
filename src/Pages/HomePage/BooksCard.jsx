@@ -5,6 +5,7 @@ import { MdOutlineStar } from 'react-icons/md';
 import { Link } from 'react-router';
 
 export default function BooksCard({ book }) {
+
     console.log(book)
     return (
         <div className='p-5 bg-[#DCFCE7] rounded-lg flex flex-col'>
@@ -26,7 +27,7 @@ export default function BooksCard({ book }) {
                     <p>{book.rating}</p>
                 </div>
             </div>
-            <Link className='btn bg-[#23BE0A] text-white w-full py-2 border-none mt-3 rounded-lg'>View Details</Link>
+            <Link to='/book-details' className='btn bg-[#23BE0A] text-white w-full py-2 border-none mt-3 rounded-lg'>Book Details</Link>
 
         </div>
     )
