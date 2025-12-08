@@ -31,7 +31,13 @@ export default function Navbar() {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/books'>Books</NavLink></li>
         <li><NavLink to='/request-delivery'>Request Delivery</NavLink></li>
-        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+        {
+            user && <>
+
+            <li><NavLink to='/dashboard/my-orders'>My Dashboard</NavLink></li>
+
+            </>
+        }
     </>
     return (
         <div className="navbar bg-base-100 sticky top-0 z-[1000] shadow-sm">

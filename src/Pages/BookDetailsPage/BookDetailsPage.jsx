@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { MdOutlineStar } from 'react-icons/md'
 import { useParams } from 'react-router'
+import useAxiosSecure from '../../Components/Hooks/useAxiosSecure'
+import useAuth from '../../Components/Hooks/useAuth'
 
 export default function BookDetailsPage() {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const { user } = useAuth();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+    const axiosSecure = useAxiosSecure();
     const [book, setBook] = useState([])
-    console.log(book)
+    // console.log(book)
 
     const { id } = useParams();
 
@@ -21,15 +26,36 @@ export default function BookDetailsPage() {
 
             })
     }, [id])
-    const { image_URL, title,writer_image,writer,rating,description,publisher_name,publishDate,languese,price
- } = book;
- 
+    const { image_URL, title, writer_image, writer, rating, description, publisher_name, publishDate, languese, price
+    } = book;
+
 
     const handleRegistration = (data) => {
-        console.log(data)
-        reset();
 
-        document.getElementById('my_modal_5').close();
+          const orderData = {
+        ...data,         
+        bookId: book._id, 
+        bookTitle: book.title,
+        bookImage: book.image_URL,
+        price: book.price,
+        orderDate: new Date(),
+        status: "pending",
+        paymentStatus: "unpaid"
+    };
+
+
+        axiosSecure.post('/orders', orderData)
+            .then(res => {
+                if (res.data.acknowledged) {
+                    console.log('after saveing order in database', res.data)
+                    reset();
+
+                    document.getElementById('my_modal_5').close();
+                }
+
+            })
+        // console.log(data)
+
     }
     return (
 
@@ -77,25 +103,28 @@ export default function BookDetailsPage() {
                             <fieldset className="fieldset">
                                 {/* Name */}
                                 <label className="label font-semibold text-black">Name</label>
-                                <input type="text" className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('name', { required: true })} placeholder="Your Name" />
+                                <input type="text" defaultValue={user?.displayName} readOnly className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('name', { required: true })} placeholder="Your Name" />
                                 {errors.name?.type === "required" && <p className='text-red-500'>name is required.</p>
-                                }
-                                {/* Address */}
-                                <label className="label font-semibold text-black">Address</label>
-                                <input type="text" className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('address', { required: true })} placeholder="Your address" />
-                                {errors.name?.type === "required" && <p className='text-red-500'>address is required.</p>
-                                }
-                                {/* Phone Number */}
-                                <label className="label font-semibold text-black">Phone Number</label>
-                                <input type="number" className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('Phone Number', { required: true })} placeholder="Your Phone Number" />
-                                {errors.name?.type === "required" && <p className='text-red-500'>Phone Number is required.</p>
                                 }
 
                                 {/* email */}
                                 <label className="label font-semibold text-black">Email</label>
-                                <input type="email" className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('email', { required: true })} placeholder="Email" />
+                                <input type="email" defaultValue={user?.email} readOnly className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('email', { required: true })} placeholder="Email" />
                                 {errors.email?.type === "required" && <p className='text-red-500'>Email is required.</p>
                                 }
+
+                                {/* Address */}
+                                <label className="label font-semibold text-black">Address</label>
+                                <input type="text" required className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('address', { required: true })} placeholder="Your address" />
+                                {errors.name?.type === "required" && <p className='text-red-500'>address is required.</p>
+                                }
+                                {/* Phone Number */}
+                                <label className="label font-semibold text-black">Phone Number</label>
+                                <input type="number" required className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200" {...register('Phone Number', { required: true })} placeholder="Your Phone Number" />
+                                {errors.name?.type === "required" && <p className='text-red-500'>Phone Number is required.</p>
+                                }
+
+
                                 {/* button */}
                                 <button className="btn bg-[#23BE0A] dark:border-none text-white px-3 rounded-lg">Place Order</button>
                             </fieldset>
@@ -104,7 +133,7 @@ export default function BookDetailsPage() {
                         <div className="modal-action">
                             <form method="dialog">
                                 {/* if there is a button in form, it will close the modal */}
-                                <button className="btn dark:border-none bg-red-500 text-white px-3 rounded-lg">Close</button>
+                                <button className="btn dark:border-none bg-red-500 text-white px-3 rounded-lg">Cancel</button>
                             </form>
                         </div>
                     </div>
