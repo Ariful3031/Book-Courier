@@ -2,8 +2,7 @@ import React from 'react'
 import useAuth from '../../Components/Hooks/useAuth'
 import useAxiosSecure from '../../Components/Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { FaMagnifyingGlass } from "react-icons/fa6";
+import { Link } from 'react-router';
 
 export default function MyOrdersPage() {
   const { user } = useAuth();
@@ -16,7 +15,21 @@ export default function MyOrdersPage() {
       return res.data;
     }
   })
-  console.log(orders)
+  const handlePayment = async (order) => {
+    const paymentInfo = {
+      price: order.price,
+      orderId: order._id,
+      customer_email: order.email,
+      orderName: order.bookTitle
+    }
+
+    const res = await axiosSecure.post('payment-checkout-session', paymentInfo)
+    window.location.assign(res.data.url);
+    // window.location.href = res.data.url;
+    // console.log(res.data)
+
+  }
+  // console.log(orders)
   return (
     <div>
       <h1>All my orders: {orders.length}</h1>
@@ -43,17 +56,17 @@ export default function MyOrdersPage() {
                 <td>{order.orderDate}</td>
                 <td>
                   {
-                  order.paymentStatus ==='paid'?  <span className='text-green-500'>Paid </span>: <span className='text-red-500'>Unpaid</span>
-                   
+                    order.paymentStatus === 'paid' ? <span className='text-green-500'>Paid </span> : <span className='text-red-500'>Unpaid</span>
+
                   }
                 </td>
 
-                <td>{
-                order.status==="rejacted"? <span className='text-red-500'>Rejected</span> : <span className='text-yellow-600'>Pending</span>
-                  }</td>
                 <td>
-                  <button className='btn bg-green-500 text-white'>
-                    Pay now
+                  <p className={order.status==='pending'? 'text-yellow-500': order.status==='complete'? 'text-green-500':'text-red-500'}>{order.status}</p> 
+                </td>
+                <td>
+                  <button onClick={() => handlePayment(order)} className='btn bg-green-500 text-white'>
+                    Pay now 
                   </button>
                   <button className='btn bg-red-500 ml-2 text-white'>
                     cancel

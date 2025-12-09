@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { MdOutlineStar } from 'react-icons/md'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import useAxiosSecure from '../../Components/Hooks/useAxiosSecure'
 import useAuth from '../../Components/Hooks/useAuth'
+import { toast } from 'react-toastify'
 
 export default function BookDetailsPage() {
+    const navigate = useNavigate();
     const { user } = useAuth();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
@@ -32,25 +34,27 @@ export default function BookDetailsPage() {
 
     const handleRegistration = (data) => {
 
-          const orderData = {
-        ...data,         
-        bookId: book._id, 
-        bookTitle: book.title,
-        bookImage: book.image_URL,
-        price: book.price,
-        orderDate: new Date(),
-        status: "pending",
-        paymentStatus: "unpaid"
-    };
+        const orderData = {
+            ...data,
+            bookId: book._id,
+            bookTitle: book.title,
+            bookImage: book.image_URL,
+            price: book.price,
+            orderDate: new Date(),
+            status: "pending",
+            paymentStatus: "unpaid"
+        };
 
 
         axiosSecure.post('/orders', orderData)
             .then(res => {
-                if (res.data.acknowledged) {
+                if (res.data.insertedId) {
                     console.log('after saveing order in database', res.data)
                     reset();
 
                     document.getElementById('my_modal_5').close();
+                    toast.success('order succes. please pay')
+                    navigate('/dashboard/my-orders')
                 }
 
             })

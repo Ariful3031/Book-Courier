@@ -9,6 +9,10 @@ import MainLayout from "../Layouts/MainLayout";
 import BookDetailsPage from "../Pages/BookDetailsPage/BookDetailsPage";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import MyOrdersPage from "../Pages/DashboardPage/MyOrdersPage";
+import PaymentSuccess from "../Pages/DashboardPage/PaymentSuccess";
+import PaymentCancelled from "../Pages/DashboardPage/PaymentCancelled";
+import PaymentPage from "../Pages/DashboardPage/Paymentpage";
+import PaymentHistory from "../Pages/DashboardPage/PaymentHistory";
 
 
 export const router = createBrowserRouter([
@@ -51,6 +55,22 @@ export const router = createBrowserRouter([
             {
                 path: 'my-orders',
                 Component: MyOrdersPage
+            },
+            {
+                path: 'payment/:orderId',
+                Component: PaymentPage
+            },
+            {
+                path: 'payment-success',
+                Component: PaymentSuccess
+            },
+            {
+                path: 'payment-cancelled',
+                Component: PaymentCancelled
+            },
+            {
+                path: 'payment-histroy',
+                Component: PaymentHistory
             }
         ]
     },
