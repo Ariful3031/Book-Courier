@@ -28,7 +28,7 @@ export default function BookDetailsPage() {
 
             })
     }, [id])
-    const { image_URL, title, writer_image, writer, rating, description, publisher_name, publishDate, languese, price
+    const { bookUrl, bookName, writerUrl, writerName, rating, description, publishStatus, language, createAt, price
     } = book;
 
 
@@ -37,8 +37,8 @@ export default function BookDetailsPage() {
         const orderData = {
             ...data,
             bookId: book._id,
-            bookTitle: book.title,
-            bookImage: book.image_URL,
+            bookTitle: book.bookName,
+            bookImage: book.bookUrl,
             price: book.price,
             orderDate: new Date(),
             status: "pending",
@@ -66,15 +66,15 @@ export default function BookDetailsPage() {
         <div className=' grid grid-cols-12 gap-5 dark:bg-yellow-500'>
 
             <div className='w-full h-[500px] p-5 col-span-5'>
-                <img className='w-full h-full  border-none' src={image_URL} alt="" />
+                <img className='w-full h-full  border-none' src={bookUrl} alt="" />
             </div>
             {/* right sight  */}
             <div className=' w-full col-span-7 p-5'>
-                <h1 className='text-3xl font-semibold dark:text-white my-5'>{title}</h1>
+                <h1 className='text-3xl font-semibold dark:text-white my-5'>{bookName}</h1>
                 <div className='flex items-center gap-5'>
                     {/* writer image and name */}
-                    <img className='w-15 h-15 rounded-full' src={writer_image} alt="" />
-                    <h2 className='text-2xl font-medium dark:text-white'>{writer}</h2>
+                    <img className='w-15 h-15 rounded-full' src={writerUrl} alt="" />
+                    <h2 className='text-2xl font-medium dark:text-white'>{writerName}</h2>
                 </div>
                 <div className='items-center mt-3 gap-2 inline-flex bg-[#00D390] px-2 rounded-lg dark:text-black '>
                     <div className='flex'>
@@ -89,9 +89,9 @@ export default function BookDetailsPage() {
                 <p className='text-xl mt-1 font-medium'>description:  </p>
                 <span className='text-[16px]'>{description}</span>
 
-                <p className='text-xl mt-1 font-medium'>publisherName: <span className='text-[16px]'>{publisher_name}</span></p>
-                <p className='text-xl mt-1 font-medium'>First Publish : <span className='text-[16px]'>{publishDate}</span></p>
-                <p className='text-xl mt-1 font-medium'>Languese: <span className='text-[16px]'>{languese}</span></p>
+                <p className='text-xl mt-1 font-medium'>PublishStatus: <span className='text-[16px]'>{publishStatus}</span></p>
+                <p className='text-xl mt-1 font-medium'>CreateAt : <span className='text-[16px]'>{createAt}</span></p>
+                <p className='text-xl mt-1 font-medium'>Language: <span className='text-[16px]'>{language}</span></p>
                 <p className='text-xl mt-1 font-medium'>Price: <span className='text-[16px]'>{price}</span></p>
                 <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-[#23BE0A] text-white dark:border-none px-3 rounded-lg">Order Now</button>
 
@@ -101,8 +101,7 @@ export default function BookDetailsPage() {
                     <div className="modal-box dark:bg-white">
 
 
-                        <form
-                            onSubmit={handleSubmit(handleRegistration)}
+                        <form onSubmit={handleSubmit(handleRegistration)}
                         >
                             <fieldset className="fieldset">
                                 {/* Name */}

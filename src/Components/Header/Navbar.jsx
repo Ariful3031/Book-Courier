@@ -31,10 +31,12 @@ export default function Navbar() {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/books'>Books</NavLink></li>
         <li><NavLink to='/request-delivery'>Request Delivery</NavLink></li>
+        <li><NavLink to='/add-book'>Add A book</NavLink></li>
         {
             user && <>
 
             <li><NavLink to='/dashboard/my-orders'>My Dashboard</NavLink></li>
+            
 
             </>
         }

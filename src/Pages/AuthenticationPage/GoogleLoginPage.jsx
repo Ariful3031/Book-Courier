@@ -1,9 +1,12 @@
 import React from 'react'
 import useAuth from '../../Components/Hooks/useAuth'
 import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router';
 
 export default function GoogleLoginPage() {
     const { googleUser,setUser } = useAuth();
+    const location =useLocation();
+    const navigate=useNavigate();
 
     const handleGoogoleLogin = () => {
         googleUser()
@@ -11,6 +14,7 @@ export default function GoogleLoginPage() {
                 console.log(result.user)
                 if (result.user.email) {
                     // setUser(result.user)
+                    navigate(location?.state|| '/')
                     toast.success('login successful')
                 }
 

@@ -13,6 +13,8 @@ import PaymentSuccess from "../Pages/DashboardPage/PaymentSuccess";
 import PaymentCancelled from "../Pages/DashboardPage/PaymentCancelled";
 import PaymentPage from "../Pages/DashboardPage/Paymentpage";
 import PaymentHistory from "../Pages/DashboardPage/PaymentHistory";
+import AddBook from "../Pages/DashboardPage/LibrarianDashboard/AddBook";
+import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -30,27 +32,37 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: 'login',
-                Component: LoginPage
+                path: '/login',
+                element: <LoginPage></LoginPage>,
             },
             {
-                path: 'register',
-                Component: RegisterPage
+                path: '/register',
+                element: <RegisterPage></RegisterPage>,
             },
             {
-                path: 'request-delivery',
+                path: '/request-delivery',
                 Component: RequestDeliveryPage
             },
             {
-                path: 'book/details/:id',
-                Component: BookDetailsPage,
+                path: '/add-book',
+                element: <PrivateRoute>
+                    <AddBook></AddBook>
+                </PrivateRoute>
+            },
+            {
+                path: '/book/details/:id',
+                element: <PrivateRoute>
+                    <BookDetailsPage></BookDetailsPage>
+                </PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`)
             },
         ]
     },
     {
         path: 'dashboard',
-        Component: DashboardLayout,
+        element: <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+        </PrivateRoute>,
         children: [
             {
                 path: 'my-orders',

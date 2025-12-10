@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import useAuth from '../../../Components/Hooks/useAuth'
 import { toast } from 'react-toastify';
 import GoogleLoginPage from '../GoogleLoginPage';
@@ -8,9 +8,11 @@ import { IoMdEyeOff } from 'react-icons/io';
 import { FaEye } from 'react-icons/fa';
 
 export default function LoginPage() {
-  const { signinUser,setUser } = useAuth();
+  const { signinUser } = useAuth();
   const { register, handleSubmit, formState: { errors }, } = useForm()
   const [showPassword, setShowPassword] = useState(false)
+  const locaction = useLocation();
+  const navigate = useNavigate();
 
   const handleLogin = (data) => {
     console.log(data)
@@ -19,6 +21,7 @@ export default function LoginPage() {
         console.log(result.user)
         if (result.user) {
           // setUser(result.user)
+          navigate(locaction?.state || '/')
           toast.success('login successfull')
         }
       })
