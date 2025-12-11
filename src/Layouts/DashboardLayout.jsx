@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, NavLink, Outlet } from 'react-router'
-import { FaCreditCard, FaJediOrder } from 'react-icons/fa';
+import { FaCreditCard, FaJediOrder, FaMotorcycle } from 'react-icons/fa';
 
 export default function DashboardLayout() {
   return (
@@ -36,16 +36,23 @@ export default function DashboardLayout() {
             {/* our dashboard link  */}
             {/* My orders Link */}
             <li>
-              <Link to='/dashboard/my-orders' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+              <Link to='/dashboard/my-orders' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Orders">
                 <FaJediOrder />
                 <span className="is-drawer-close:hidden">My Orders</span>
               </Link>
             </li>
             {/* My Payment histroy Link */}
             <li>
-              <Link to='/dashboard/payment-histroy' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+              <Link to='/dashboard/payment-histroy' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History">
                 <FaCreditCard />
                 <span className="is-drawer-close:hidden">Payment History</span>
+              </Link>
+            </li>
+            {/* My Payment histroy Link */}
+            <li>
+              <Link to='/dashboard/approve-librarian' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve-Librarian">
+                <FaMotorcycle />
+                <span className="is-drawer-close:hidden">Approve-Librarian</span>
               </Link>
             </li>
             {/* List item */}

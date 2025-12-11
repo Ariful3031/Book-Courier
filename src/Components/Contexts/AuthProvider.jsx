@@ -50,6 +50,7 @@ export default function AuthProvider({ children }) {
         setUser,
         logout,
         updateUserProfile,
+        loading,
     }
     return (
         <AuthContext value={authInfo}>

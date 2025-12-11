@@ -30,6 +30,7 @@ export default function BookDetailsPage() {
     }, [id])
     const { bookUrl, bookName, writerUrl, writerName, rating, description, publishStatus, language, createAt, price
     } = book;
+    console.log(book);
 
 
     const handleRegistration = (data) => {

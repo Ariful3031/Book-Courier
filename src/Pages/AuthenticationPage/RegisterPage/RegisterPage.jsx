@@ -7,6 +7,7 @@ import GoogleLoginPage from '../GoogleLoginPage';
 import { IoMdEyeOff } from 'react-icons/io';
 import { FaEye } from 'react-icons/fa';
 import axios from 'axios';
+import useAxiosSecure from '../../../Components/Hooks/useAxiosSecure';
 
 export default function RegisterPage() {
     const { registerUser, updateUserProfile } = useAuth();
@@ -14,6 +15,7 @@ export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false)
     const location = useLocation();
     const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure();
 
     const handleRegistration = (data) => {
         // console.log(data.photo[0])
@@ -30,13 +32,26 @@ export default function RegisterPage() {
 
                 axios.post(image_API_URL, formData)
                     .then(res => {
-                        console.log('after image url:', res.data.data.url)
-
-                        //update user profile
+                        // console.log('after image url:', res.data.data.url)
+                        const photoURL = res.data.data.url;
+                        // create user in the database
+                        const userInfo = {
+                            email: data.email,
+                            displayName: data.name,
+                            photoURL: photoURL
+                        }
+                        axiosSecure.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user create in the data base');
+                                }
+                            })
+                        //update user profile to fire base
                         const userProfile = {
                             displayName: data.name,
-                            photoURL: res.data.data.url
+                            photoURL: photoURL
                         }
+
 
                         updateUserProfile(userProfile)
                             .then(() => {
@@ -111,7 +126,7 @@ export default function RegisterPage() {
                     </form>
                     <GoogleLoginPage></GoogleLoginPage>
                     <h1>Already have an account?<Link
-                        state={location.state} 
+                        state={location.state}
                         to='/login' className='text-red-500 underline'>Login</Link></h1>
                 </div>
             </div>

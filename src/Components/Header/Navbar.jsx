@@ -30,7 +30,7 @@ export default function Navbar() {
     const Links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/books'>Books</NavLink></li>
-        <li><NavLink to='/request-delivery'>Request Delivery</NavLink></li>
+        <li><NavLink to='/be-librarian'>Be A Librarian</NavLink></li>
         <li><NavLink to='/add-book'>Add A book</NavLink></li>
         {
             user && <>

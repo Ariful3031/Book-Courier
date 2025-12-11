@@ -2,26 +2,40 @@ import React from 'react'
 import useAuth from '../../Components/Hooks/useAuth'
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
+import useAxiosSecure from '../../Components/Hooks/useAxiosSecure';
 
 export default function GoogleLoginPage() {
-    const { googleUser,setUser } = useAuth();
-    const location =useLocation();
-    const navigate=useNavigate();
+    const { googleUser, setUser } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
 
     const handleGoogoleLogin = () => {
         googleUser()
             .then(result => {
-                console.log(result.user)
-                if (result.user.email) {
-                    // setUser(result.user)
-                    navigate(location?.state|| '/')
-                    toast.success('login successful')
+                // console.log(result.user)
+
+                const userInfo = {
+                    email: result.user.email,
+                    displayName: result.user.displayName,
+                    photoURL: result.user.photoURL
                 }
+                axiosSecure.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            console.log('user create in the data base');
+
+
+                            navigate(location?.state || '/')
+                            toast.success('login successful')
+                        }
+                    })
+
 
             })
             .catch(err => {
                 toast.error(err)
-                console.log(err)
+                // console.log(err)
             })
     }
 

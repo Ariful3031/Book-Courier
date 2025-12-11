@@ -4,7 +4,6 @@ import HomePage from "../Pages/HomePage/HomePage";
 import AllBooks from "../Pages/AllBooks/AllBooks";
 import LoginPage from "../Pages/AuthenticationPage/LoginPage/LoginPage";
 import RegisterPage from "../Pages/AuthenticationPage/RegisterPage/RegisterPage";
-import RequestDeliveryPage from "../Pages/RequestDelivery/RequestDeliveryPage";
 import MainLayout from "../Layouts/MainLayout";
 import BookDetailsPage from "../Pages/BookDetailsPage/BookDetailsPage";
 import DashboardLayout from "../Layouts/DashboardLayout";
@@ -15,6 +14,8 @@ import PaymentPage from "../Pages/DashboardPage/Paymentpage";
 import PaymentHistory from "../Pages/DashboardPage/PaymentHistory";
 import AddBook from "../Pages/DashboardPage/LibrarianDashboard/AddBook";
 import PrivateRoute from "./PrivateRoute";
+import BeALibrarian from "../Pages/BeALibrarian/BeALibrarian";
+import ApproveLibrarian from "../Pages/DashboardPage/LibrarianDashboard/ApproveLibrarian";
 
 
 export const router = createBrowserRouter([
@@ -40,8 +41,8 @@ export const router = createBrowserRouter([
                 element: <RegisterPage></RegisterPage>,
             },
             {
-                path: '/request-delivery',
-                Component: RequestDeliveryPage
+                path: '/be-librarian',
+                element: <BeALibrarian></BeALibrarian>
             },
             {
                 path: '/add-book',
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
             {
                 path: 'payment-histroy',
                 Component: PaymentHistory
+            },
+            {
+                path: 'approve-librarian',
+                Component: ApproveLibrarian
             }
         ]
     },
