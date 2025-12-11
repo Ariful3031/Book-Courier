@@ -7,7 +7,7 @@ import { Navigate, useLocation
 export default function PrivateRoute({children}) {
     const location = useLocation();
     // const navigate= useNavigate()
-    console.log(location)
+    // console.log(location)
 
     const { user, loading } = useAuth();
 

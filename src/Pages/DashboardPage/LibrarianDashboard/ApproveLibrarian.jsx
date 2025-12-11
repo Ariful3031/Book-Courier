@@ -44,7 +44,7 @@ export default function ApproveLibrarian() {
 
   return (
      <div>
-            <h1 className='text-5xl'>Riders Pending Approval:{librarians.length}</h1>
+            <h1 className='text-5xl'>Librarians Pending Approval:{librarians.length}</h1>
 
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
@@ -54,6 +54,7 @@ export default function ApproveLibrarian() {
                             <th>SL.</th>
                             <th>Name</th>
                             <th>Email</th>
+                            {/* <th>Role</th> */}
                             <th>Status</th>
                             <th>createAt</th>
                             <th>Actions</th>
@@ -65,6 +66,7 @@ export default function ApproveLibrarian() {
                                 <th>{index + 1}</th>
                                 <td>{librarian.name}</td>
                                 <td>{librarian.email}</td>
+                                {/* <td>{librarian.role}</td> */}
                                 <td>
                                     <p className={`${librarian.status === 'approved' ? 'text-green-400' : 'text-red-500'}`}>  {librarian.status}</p>
 

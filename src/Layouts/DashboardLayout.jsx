@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link, NavLink, Outlet } from 'react-router'
-import { FaCreditCard, FaJediOrder, FaMotorcycle } from 'react-icons/fa';
+import { FaCreditCard, FaJediOrder, FaMotorcycle, FaUsers } from 'react-icons/fa';
+import useRole from '../Components/Hooks/useRole';
 
 export default function DashboardLayout() {
+  const { role } = useRole();
+  // console.log(role.role);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -48,13 +51,26 @@ export default function DashboardLayout() {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </Link>
             </li>
-            {/* My Payment histroy Link */}
-            <li>
-              <Link to='/dashboard/approve-librarian' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve-Librarian">
-                <FaMotorcycle />
-                <span className="is-drawer-close:hidden">Approve-Librarian</span>
-              </Link>
-            </li>
+
+            {
+              role.role === 'admin' && <>
+                {/* Approve Librarian Link */}
+                <li>
+                  <Link to='/dashboard/approve-librarian' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Librarian">
+                    <FaMotorcycle />
+                    <span className="is-drawer-close:hidden">Approve Librarian</span>
+                  </Link>
+                </li>
+                {/*  Users management  Link */}
+                <li>
+                  <Link to='/dashboard/users-management' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Users Management ">
+                    <FaUsers></FaUsers>
+                    <span className="is-drawer-close:hidden">Users Management</span>
+                  </Link>
+                </li>
+              </>
+            }
+
             {/* List item */}
             <li>
               <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">

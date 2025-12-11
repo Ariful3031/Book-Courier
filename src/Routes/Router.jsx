@@ -16,6 +16,10 @@ import AddBook from "../Pages/DashboardPage/LibrarianDashboard/AddBook";
 import PrivateRoute from "./PrivateRoute";
 import BeALibrarian from "../Pages/BeALibrarian/BeALibrarian";
 import ApproveLibrarian from "../Pages/DashboardPage/LibrarianDashboard/ApproveLibrarian";
+import UsersManagement from "../Pages/DashboardPage/UsersManagement";
+import AdminRoute from "./AdminRoute";
+import LibrarianRoute from "./LibrarianRoute";
+import AdminAndLibrarianRoute from "./AdminAndLibrarianRoute";
 
 
 export const router = createBrowserRouter([
@@ -46,9 +50,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/add-book',
-                element: <PrivateRoute>
-                    <AddBook></AddBook>
-                </PrivateRoute>
+                element: <AdminAndLibrarianRoute><AddBook></AddBook></AdminAndLibrarianRoute>
+                // element: <LibrarianRoute><AddBook></AddBook></LibrarianRoute>
+                
             },
             {
                 path: '/book/details/:id',
@@ -87,7 +91,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'approve-librarian',
-                Component: ApproveLibrarian
+                element: <AdminRoute><ApproveLibrarian></ApproveLibrarian></AdminRoute>
+            },
+            {
+                path: 'users-management',
+                element: <AdminRoute><UsersManagement></UsersManagement></AdminRoute>
             }
         ]
     },
