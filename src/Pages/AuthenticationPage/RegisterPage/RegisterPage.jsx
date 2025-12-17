@@ -62,12 +62,9 @@ export default function RegisterPage() {
                             })
                     })
 
-                if (result.user) {
                     // setUser(result.user)
                     navigate(location?.state || '/')
                     toast.success('login successfull')
-
-                }
             })
             .catch(error => {
                 console.log("Register Error:", error.message);

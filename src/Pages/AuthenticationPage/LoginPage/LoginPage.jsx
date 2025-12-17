@@ -18,12 +18,12 @@ export default function LoginPage() {
     console.log(data)
     signinUser(data.email, data.password)
       .then(result => {
-        console.log(result.user)
-        if (result.user) {
-          // setUser(result.user)
-          navigate(locaction?.state || '/')
-          toast.success('login successfull')
-        }
+        // console.log(result.user)
+
+        // setUser(result.user)
+        navigate(locaction?.state || '/')
+        toast.success('login successfull')
+
       })
       .catch(error => {
         console.log("Register Error:", error.message);

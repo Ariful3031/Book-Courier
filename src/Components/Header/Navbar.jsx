@@ -5,7 +5,8 @@ import logoImg from '../../assets/screen book logo.png'
 import useAuth from '../Hooks/useAuth';
 
 export default function Navbar() {
-    const { user,logout } = useAuth();
+    const { user, logout } = useAuth();
+    console.log(user?.photoURL)
 
     const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
 
@@ -19,12 +20,12 @@ export default function Navbar() {
         setTheme(checked ? "dark" : "light")
     }
 
-    const handleLogOut =()=>{
+    const handleLogOut = () => {
         logout()
-        .then()
-        .catch(error=>{
-            console.log(error)
-        })
+            .then()
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     const Links = <>
@@ -35,14 +36,15 @@ export default function Navbar() {
         {
             user && <>
 
-            <li><NavLink to='/dashboard/my-orders'>My Dashboard</NavLink></li>
-            
+                <li><NavLink to='/dashboard/my-orders'>My Dashboard</NavLink></li>
+
 
             </>
         }
     </>
     return (
         <div className="navbar bg-base-100 sticky top-0 z-[1000] shadow-sm">
+
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
@@ -68,7 +70,37 @@ export default function Navbar() {
                     <input onChange={(e) => handleTheme(e.target.checked)} type="checkbox" className="toggle theme-controller" />
                 </div>
                 {
-                    user ? <button onClick={handleLogOut} className='btn bg-[#23BE0A] text-white px-3 rounded-lg'>Log Out</button> : <Link to='/login' className="btn bg-[#23BE0A] text-white px-3 rounded-lg">Login</Link>
+                    user ?
+                   
+                            <div className="flex-none">
+                                <div className="dropdown dropdown-end">
+                                    {/* Profile Image */}
+                                    <label tabIndex={0} className="btn btn-ghost w-12 h-12 btn-circle avatar">
+                                      
+                                           <img className='rounded-full' src={user?.photoURL} alt="" />
+                                   
+                                    </label>
+
+                                    {/* Dropdown Menu */}
+                                    <ul
+                                        tabIndex={0}
+                                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                                    >
+                                        <li>
+                                            <Link to="/profile">Profile</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/settings">Settings</Link>
+                                        </li>
+                                        <li>
+                                            <button onClick={handleLogOut} className="text-red-500">Logout</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                  
+                        :
+                        <Link to='/login' className="btn bg-[#23BE0A] text-white px-3 rounded-lg">Login</Link>
                 }
 
             </div>

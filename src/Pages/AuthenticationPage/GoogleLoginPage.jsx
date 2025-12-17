@@ -23,12 +23,10 @@ export default function GoogleLoginPage() {
                 axiosSecure.post('/users', userInfo)
                     .then(res => {
                         if (res.data.insertedId) {
-                            console.log('user create in the data base');
-
-
-                            navigate(location?.state || '/')
-                            toast.success('login successful')
+                            // console.log('user create in the data base');
                         }
+                        navigate(location?.state || '/')
+                        toast.success('login successful')
                     })
 
 
