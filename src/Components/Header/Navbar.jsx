@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from "react-router";
 import logoImg from '../../assets/screen book logo.png'
 import useAuth from '../Hooks/useAuth';
+import { toast } from 'react-toastify';
 
 export default function Navbar() {
     const { user, logout } = useAuth();
-    console.log(user?.photoURL)
+    // console.log(user?.photoURL)
 
     const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
 
@@ -24,7 +25,8 @@ export default function Navbar() {
         logout()
             .then()
             .catch(error => {
-                console.log(error)
+                toast.error(error.message)
+                // console.log(error)
             })
     }
 

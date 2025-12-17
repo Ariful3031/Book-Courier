@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import BooksCard from '../HomePage/Bookscard';
 import useAxiosSecure from '../../Components/Hooks/useAxiosSecure';
+import BooksCard from '../HomePage/BooksCard';
 
 export default function AllBooks() {
   const axiosSecure = useAxiosSecure();

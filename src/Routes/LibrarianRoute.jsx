@@ -7,7 +7,7 @@ export default function LibrarianRoute({children}) {
     
   const { role, roleLoading } = useRole();
      const { loading } = useAuth();
-     console.log(role?.role)
+    //  console.log(role?.role)
  
      if (loading || roleLoading) {
          return <Loading></Loading>

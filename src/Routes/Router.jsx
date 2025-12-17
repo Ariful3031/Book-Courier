@@ -20,6 +20,7 @@ import UsersManagement from "../Pages/DashboardPage/UsersManagement";
 import AdminRoute from "./AdminRoute";
 import AdminAndLibrarianRoute from "./AdminAndLibrarianRoute";
 import Profile from "../Components/Profile/Profile";
+import MyWishlistsPage from "../Pages/DashboardPage/MyWishlistsPage";
 
 
 export const router = createBrowserRouter([
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
             {
                 path: 'payment-histroy',
                 Component: PaymentHistory
+            },
+            {
+                path: 'my-wishlists',
+                Component: MyWishlistsPage
             },
             {
                 path: 'approve-librarian',

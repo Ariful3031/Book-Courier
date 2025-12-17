@@ -30,11 +30,10 @@ export default function BookDetailsPage() {
     }, [id])
     const { bookUrl, bookName, writerUrl, writerName, rating, description, publishStatus, language, createAt, price
     } = book;
-    console.log(book);
+    // console.log(book);
 
 
     const handleRegistration = (data) => {
-
         const orderData = {
             ...data,
             bookId: book._id,
@@ -45,12 +44,10 @@ export default function BookDetailsPage() {
             status: "pending",
             paymentStatus: "unpaid"
         };
-
-
         axiosSecure.post('/orders', orderData)
             .then(res => {
                 if (res.data.insertedId) {
-                    console.log('after saveing order in database', res.data)
+                    // console.log('after saveing order in database', res.data)
                     reset();
 
                     document.getElementById('my_modal_5').close();
@@ -59,9 +56,24 @@ export default function BookDetailsPage() {
                 }
 
             })
-        // console.log(data)
+   
 
     }
+
+
+    const handelWishlists = (book) => {
+      
+        axiosSecure.post('/wishlists', book)
+            .then(res => {
+                if (res.data.insertedId) {
+                    toast.success('Wishlist added successfully');
+                }
+            })
+            .catch(err => {
+                // console.log(err);
+                toast.error(err.message);
+            });
+    };
     return (
 
         <div className=' grid grid-cols-12 gap-5 dark:bg-yellow-500'>
@@ -94,8 +106,12 @@ export default function BookDetailsPage() {
                 <p className='text-xl mt-1 font-medium'>CreateAt : <span className='text-[16px]'>{createAt}</span></p>
                 <p className='text-xl mt-1 font-medium'>Language: <span className='text-[16px]'>{language}</span></p>
                 <p className='text-xl mt-1 font-medium'>Price: <span className='text-[16px]'>{price}</span></p>
-                <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-[#23BE0A] text-white dark:border-none px-3 rounded-lg">Order Now</button>
+                <div className='flex gap-5'>
+                    <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-[#23BE0A] text-white dark:border-none px-3 rounded-lg">Order Now</button>
 
+                    <button onClick={() => handelWishlists(book)} className="btn bg-[#23BE0A] text-white dark:border-none px-3 rounded-lg">Add Wishlist</button>
+
+                </div>
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
                 {/* <button className="btn" onClick={()=>document.getElementById('my_modal_5').showModal()}>open modal</button> */}
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">

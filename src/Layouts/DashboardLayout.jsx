@@ -2,6 +2,8 @@ import React from 'react'
 import { Link, NavLink, Outlet } from 'react-router'
 import { FaCreditCard, FaJediOrder, FaMotorcycle, FaUsers } from 'react-icons/fa';
 import useRole from '../Components/Hooks/useRole';
+import { SiLibrarything } from "react-icons/si";
+import { SiWish } from "react-icons/si";
 
 export default function DashboardLayout() {
   const { role } = useRole();
@@ -44,6 +46,13 @@ export default function DashboardLayout() {
                 <span className="is-drawer-close:hidden">My Orders</span>
               </Link>
             </li>
+            {/*  Users wishlists Link */}
+            <li>
+              <Link to='/dashboard/my-wishlists' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Wishlists">
+                <SiWish />
+                <span className="is-drawer-close:hidden">My wishlists</span>
+              </Link>
+            </li>
             {/* My Payment histroy Link */}
             <li>
               <Link to='/dashboard/payment-histroy' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History">
@@ -57,7 +66,8 @@ export default function DashboardLayout() {
                 {/* Approve Librarian Link */}
                 <li>
                   <Link to='/dashboard/approve-librarian' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Librarian">
-                    <FaMotorcycle />
+                    {/* <FaMotorcycle /> */}
+                    <SiLibrarything />
                     <span className="is-drawer-close:hidden">Approve Librarian</span>
                   </Link>
                 </li>
@@ -68,6 +78,7 @@ export default function DashboardLayout() {
                     <span className="is-drawer-close:hidden">Users Management</span>
                   </Link>
                 </li>
+
               </>
             }
 

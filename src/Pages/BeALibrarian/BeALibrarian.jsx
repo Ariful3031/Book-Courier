@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 export default function BeALibrarian() {
 
   const { user } = useAuth();
-  console.log(user)
+  // console.log(user)
   const { register, handleSubmit, formState: { errors } } = useForm();
   const axiosSecure = useAxiosSecure();
   const handleLibrarian = (data) => {

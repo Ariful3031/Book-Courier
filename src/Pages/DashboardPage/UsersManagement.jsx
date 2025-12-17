@@ -122,7 +122,7 @@ export default function UsersManagement() {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => <tr>
+                            users.map((user, index) => <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>
                                     <div className="flex items-center gap-3">

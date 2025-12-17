@@ -26,7 +26,7 @@ export default function PaymentPage() {
 
         const res = await axiosSecure.post('payment-checkout-session', paymentInfo)
         window.location.href = res.data.url;
-        console.log(res.data)
+        // console.log(res.data)
 
     }
     if (isLoading) {
