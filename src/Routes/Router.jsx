@@ -63,7 +63,7 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <BookDetailsPage></BookDetailsPage>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`)
+                loader: ({ params }) => fetch(`https://book-courier-server-black.vercel.app/books/${params.id}`)
             },
         ]
     },

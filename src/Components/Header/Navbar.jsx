@@ -4,12 +4,15 @@ import { Link, NavLink } from "react-router";
 import logoImg from '../../assets/screen book logo.png'
 import useAuth from '../Hooks/useAuth';
 import { toast } from 'react-toastify';
+import useRole from '../Hooks/useRole';
 
 export default function Navbar() {
     const { user, logout } = useAuth();
+    const { role } = useRole();
     // console.log(user?.photoURL)
 
     const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+    const defaultAvatar = "https://i.ibb.co/4pDNDk1/avatar.png";
 
     useEffect(() => {
         const html = document.querySelector('html')
@@ -33,11 +36,15 @@ export default function Navbar() {
     const Links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/books'>Books</NavLink></li>
-        <li><NavLink to='/be-librarian'>Be A Librarian</NavLink></li>
-        <li><NavLink to='/add-book'>Add A book</NavLink></li>
+        {
+            role.role === 'librarian' && <>
+                <li><NavLink to='/add-book'>Add A book</NavLink></li>
+
+            </>
+        }
         {
             user && <>
-
+                <li><NavLink to='/be-librarian'>Apply Librarian</NavLink></li>
                 <li><NavLink to='/dashboard/my-orders'>My Dashboard</NavLink></li>
 
 
@@ -73,34 +80,34 @@ export default function Navbar() {
                 </div>
                 {
                     user ?
-                   
-                            <div className="flex-none">
-                                <div className="dropdown dropdown-end">
-                                    {/* Profile Image */}
-                                    <label tabIndex={0} className="btn btn-ghost w-12 h-12 btn-circle avatar">
-                                      
-                                           <img className='rounded-full' src={user?.photoURL} alt="" />
-                                   
-                                    </label>
 
-                                    {/* Dropdown Menu */}
-                                    <ul
-                                        tabIndex={0}
-                                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                                    >
-                                        <li>
-                                            <Link to="/profile">Profile</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/settings">Settings</Link>
-                                        </li>
-                                        <li>
-                                            <button onClick={handleLogOut} className="text-red-500">Logout</button>
-                                        </li>
-                                    </ul>
-                                </div>
+                        <div className="flex-none">
+                            <div className="dropdown dropdown-end">
+                                {/* Profile Image */}
+                                <label tabIndex={0} className="btn btn-ghost w-12 h-12 btn-circle avatar">
+
+                                    <img className='rounded-full' src={user?.photoURL || defaultAvatar} alt="" />
+
+                                </label>
+
+                                {/* Dropdown Menu */}
+                                <ul
+                                    tabIndex={0}
+                                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                                >
+                                    <li>
+                                        <Link to="/profile">Profile</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/settings">Settings</Link>
+                                    </li>
+                                    <li>
+                                        <button onClick={handleLogOut} className="text-red-500">Logout</button>
+                                    </li>
+                                </ul>
                             </div>
-                  
+                        </div>
+
                         :
                         <Link to='/login' className="btn bg-[#23BE0A] text-white px-3 rounded-lg">Login</Link>
                 }

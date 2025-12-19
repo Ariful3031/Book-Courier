@@ -18,7 +18,7 @@ export default function BookDetailsPage() {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`http://localhost:3000/books/${id}`, {
+        fetch(`https://book-courier-server-black.vercel.app/books/${id}`, {
 
         })
             .then(res => res.json())

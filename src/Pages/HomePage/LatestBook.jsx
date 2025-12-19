@@ -10,7 +10,7 @@ export default function LatestBook() {
 
   useEffect(() => {
       const getData = async () => {
-        const result = await axiosSecure('/books')
+        const result = await axiosSecure('/books?latest=true')
         // console.log(result.data)
         setLatestBooks(result.data)
       }
@@ -20,7 +20,7 @@ export default function LatestBook() {
     return (
         <div>
             <h1 className='text-4xl font-bold mt-5 mb-10 dark:text-white  text-black text-center'>Latest Books</h1>
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
                     latestBooks.map(book => <BooksCard key={book._id} book={book}></BooksCard>)
                 }
