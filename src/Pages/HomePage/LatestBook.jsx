@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
-import BooksCard from './Bookscard';
 import useAxiosSecure from '../../Components/Hooks/useAxiosSecure';
+import BooksCard from './BooksCard';
 
 export default function LatestBook() {
     const axiosSecure = useAxiosSecure();

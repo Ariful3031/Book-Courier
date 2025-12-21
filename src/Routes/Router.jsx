@@ -21,6 +21,8 @@ import AdminRoute from "./AdminRoute";
 import AdminAndLibrarianRoute from "./AdminAndLibrarianRoute";
 import Profile from "../Components/Profile/Profile";
 import MyWishlistsPage from "../Pages/DashboardPage/MyWishlistsPage";
+import MyBooksPage from "../Pages/DashboardPage/LibrarianDashboard/MyBooksPage";
+import UpdateBookPage from "../Pages/DashboardPage/LibrarianDashboard/UpdateBookPage";
 
 
 export const router = createBrowserRouter([
@@ -96,6 +98,14 @@ export const router = createBrowserRouter([
             {
                 path: 'my-wishlists',
                 Component: MyWishlistsPage
+            },
+            {
+                path: 'my-books',
+                Component: MyBooksPage
+            },
+            {
+                path: 'update-book/:id',
+                Component: UpdateBookPage
             },
             {
                 path: 'approve-librarian',

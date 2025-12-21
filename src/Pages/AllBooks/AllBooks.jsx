@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import useAxiosSecure from '../../Components/Hooks/useAxiosSecure';
-import BooksCard from '../HomePage/Bookscard';
+
 
 // import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { useNavigation } from "react-router";
 import Loading from '../../Components/Loading/Loading';
+import BooksCard from '../HomePage/BooksCard';
 
 
 
@@ -34,8 +35,7 @@ export default function AllBooks() {
     search: "",
     category: "All",
     price: "All",
-    duration: "Any",
-    featured: "All",
+ 
   });
 
   // filter change
@@ -169,7 +169,7 @@ export default function AllBooks() {
         {/* Buttons */}
         <div className="flex justify-center gap-4">
           <button
-            // className="btn btn-primary inline-block p-2  hover:scale-105  transition"
+            // className="btn btn-primary inline-block p-2  hover:sc+ale-105  transition"
             onClick={applyFilters}
             className="btn btn-primary inline-block px-4  hover:scale-105  transition"
           >

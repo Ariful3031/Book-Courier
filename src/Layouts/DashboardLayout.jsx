@@ -4,6 +4,7 @@ import { FaCreditCard, FaJediOrder, FaMotorcycle, FaUsers } from 'react-icons/fa
 import useRole from '../Components/Hooks/useRole';
 import { SiLibrarything } from "react-icons/si";
 import { SiWish } from "react-icons/si";
+import { FaBook } from 'react-icons/fa6';
 
 export default function DashboardLayout() {
   const { role } = useRole();
@@ -58,6 +59,13 @@ export default function DashboardLayout() {
               <Link to='/dashboard/payment-histroy' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History">
                 <FaCreditCard />
                 <span className="is-drawer-close:hidden">Payment History</span>
+              </Link>
+            </li>
+            {/* My books Link */}
+            <li>
+              <Link to='/dashboard/my-books' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Books">
+                <FaBook />
+                <span className="is-drawer-close:hidden">My Books</span>
               </Link>
             </li>
 
