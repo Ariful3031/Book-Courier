@@ -1,6 +1,6 @@
-# APARTSOL Living Solutions
+# Book Courier Service
 
-ApartSol is a modern platform designed to simplify the process of buying, renting, and selling properties making it easy for individuals to discover, list, and manage real estate with ease and confidence..
+Book Courier is a responsive web app built with React, Express, MongoDB, and Tailwind CSS, allowing users to browse, filter, and manage property listings securely with login/register functionality. It features category-based search, detailed property information, profile management, and is deployed on Netlify and Vercel for a seamless experience.
 
 ## Features
 
