@@ -66,8 +66,9 @@ npm run dev
 
 ## Live URLs
 
-#### Live Project URL: 
-#### Live API URL: 
+#### Live Project URL: https://book-courier.web.app/
+#### Client Side Github Link : https://github.com/Ariful3031/Book-Courier
+#### Server Side Github Link :  https://github.com/Ariful3031/Book-Courier-Server
 ## Project Dependencies
 
 #### Dependencies List
