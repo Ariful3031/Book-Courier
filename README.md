@@ -17,7 +17,7 @@ Book Courier is a responsive web app built with React, Express, MongoDB, and Tai
 - **Authentication**: JWT (JSON Web Tokens)
 - **Database**: mongodb
 - **Styling**: Tailwind CSS
-- **Deployment**: Vercel (Backend), Netlify (Frontend)
+- **Deployment**: Vercel (Backend), firebase (Frontend)
 
 ## Getting Started
 
@@ -58,9 +58,9 @@ npm run dev
 
 ```
 # User Login:
-· Username: user
-· Email: user@user.com
-· Password: @Password1
+· Username Role: Admin
+· Email:  khawaja@gmail.com
+· Password: @#Ariful31
 
 ```
 
