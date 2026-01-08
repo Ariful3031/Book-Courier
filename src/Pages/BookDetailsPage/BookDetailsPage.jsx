@@ -163,3 +163,150 @@ export default function BookDetailsPage() {
 
     )
 }
+
+
+// import React, { useEffect, useState } from 'react'
+// import { useForm } from 'react-hook-form'
+// import { MdOutlineStar } from 'react-icons/md'
+// import { useNavigate, useParams } from 'react-router'
+// import useAxiosSecure from '../../Components/Hooks/useAxiosSecure'
+// import useAuth from '../../Components/Hooks/useAuth'
+// import { toast } from 'react-toastify'
+
+// export default function BookDetailsPage() {
+//     const navigate = useNavigate();
+//     const { user } = useAuth();
+//     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+//     const axiosSecure = useAxiosSecure();
+//     const [book, setBook] = useState({});
+
+//     const { id } = useParams();
+
+//     useEffect(() => {
+//         fetch(`https://book-courier-server-black.vercel.app/books/${id}`)
+//             .then(res => res.json())
+//             .then(data => setBook(data))
+//     }, [id])
+
+//     const { bookUrl, bookName, writerUrl, writerName, rating, description, publishStatus, language, createAt, price } = book;
+
+//     const handleOrder = (data) => {
+//         const orderData = {
+//             ...data,
+//             bookId: book._id,
+//             bookTitle: book.bookName,
+//             bookImage: book.bookUrl,
+//             price: book.price,
+//             orderDate: new Date(),
+//             status: "pending",
+//             paymentStatus: "unpaid"
+//         };
+
+//         axiosSecure.post('/orders', orderData)
+//             .then(res => {
+//                 if (res.data.insertedId) {
+//                     reset();
+//                     document.getElementById('my_modal_5').close();
+//                     toast.success('Order placed! Please pay.')
+//                     navigate('/dashboard/my-orders')
+//                 }
+//             })
+//     }
+
+//     const handleWishlist = (book) => {
+//         axiosSecure.post('/wishlists', book)
+//             .then(res => {
+//                 if (res.data.insertedId) {
+//                     toast.success('Wishlist added successfully');
+//                 }
+//             })
+//             .catch(err => {
+//                 toast.error(err.message);
+//             });
+//     };
+
+//     return (
+//         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 p-5 dark:bg-gray-900">
+
+//             {/* Left: Book Image */}
+//             <div className='w-full h-[400px] lg:h-auto col-span-5 p-5 flex justify-center items-center'>
+//                 <img className='w-full h-full object-contain rounded-lg shadow-lg' src={bookUrl} alt={bookName} />
+//             </div>
+
+//             {/* Right: Details */}
+//             <div className='w-full col-span-7 p-5'>
+//                 <h1 className='text-3xl font-semibold text-black dark:text-white my-5'>{bookName}</h1>
+
+//                 <div className='flex items-center gap-4 mb-3'>
+//                     <img className='w-12 h-12 rounded-full object-cover' src={writerUrl} alt={writerName} />
+//                     <h2 className='text-xl font-medium text-black dark:text-white'>{writerName}</h2>
+//                 </div>
+
+//                 <div className='inline-flex items-center gap-2 mb-3 px-2 py-1 bg-green-400 dark:bg-green-600 rounded-lg text-black dark:text-white'>
+//                     <div className='flex'>
+//                         {Array(5).fill().map((_, i) => <MdOutlineStar key={i} />)}
+//                     </div>
+//                     <p className='font-semibold'>{rating}</p>
+//                 </div>
+
+//                 <p className='text-lg font-semibold mt-2 text-black dark:text-white'>Description:</p>
+//                 <p className='text-gray-700 dark:text-gray-300'>{description}</p>
+
+//                 <div className='mt-3 space-y-1 text-black dark:text-white'>
+//                     <p>Publish Status: <span className='font-medium text-gray-700 dark:text-gray-300'>{publishStatus}</span></p>
+//                     <p>Created At: <span className='font-medium text-gray-700 dark:text-gray-300'>{createAt}</span></p>
+//                     <p>Language: <span className='font-medium text-gray-700 dark:text-gray-300'>{language}</span></p>
+//                     <p>Price: <span className='font-medium text-gray-700 dark:text-gray-300'>{price}</span></p>
+//                 </div>
+
+//                 <div className='flex flex-col sm:flex-row gap-3 mt-5'>
+//                     <button
+//                         onClick={() => document.getElementById('my_modal_5').showModal()}
+//                         className="btn bg-green-500 dark:bg-green-600 text-white w-full sm:w-auto px-5 rounded-lg"
+//                     >
+//                         Order Now
+//                     </button>
+
+//                     <button
+//                         onClick={() => handleWishlist(book)}
+//                         className="btn bg-green-500 dark:bg-green-600 text-white w-full sm:w-auto px-5 rounded-lg"
+//                     >
+//                         Add Wishlist
+//                     </button>
+//                 </div>
+
+//                 {/* Modal for Order */}
+//                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+//                     <div className="modal-box dark:bg-gray-800 dark:text-white">
+//                         <h3 className='text-xl font-bold mb-4'>Place Your Order</h3>
+//                         <form onSubmit={handleSubmit(handleOrder)}>
+//                             <fieldset className="space-y-3">
+//                                 <label className="label font-semibold">Name</label>
+//                                 <input type="text" defaultValue={user?.displayName} readOnly
+//                                     className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('name')}
+//                                 />
+
+//                                 <label className="label font-semibold">Email</label>
+//                                 <input type="email" defaultValue={user?.email} readOnly
+//                                     className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('email')}
+//                                 />
+
+//                                 <label className="label font-semibold">Address</label>
+//                                 <input type="text" className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('address', { required: true })} required />
+
+//                                 <label className="label font-semibold">Phone Number</label>
+//                                 <input type="number" className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('phone', { required: true })} required />
+
+//                                 <button className="btn bg-green-500 dark:bg-green-600 text-white w-full mt-4 rounded-lg">Place Order</button>
+//                             </fieldset>
+//                         </form>
+//                         <div className="modal-action">
+//                             <button className="btn bg-red-500 dark:bg-red-600 text-white rounded-lg" onClick={() => document.getElementById('my_modal_5').close()}>Cancel</button>
+//                         </div>
+//                     </div>
+//                 </dialog>
+//             </div>
+//         </div>
+//     )
+// }

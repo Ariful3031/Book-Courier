@@ -19,6 +19,5 @@ body {
 
 a.active {
   text-decoration: underline;
-  background: green;
-  color: white;
+  color: purple;
 }

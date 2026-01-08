@@ -26,6 +26,7 @@ import ProfilePage from "../Components/Profile/ProfilePage";
 import Setting from "../Components/Setting/Setting";
 import ErrorPage404 from "../Components/ErrorPage/ErrorPage404";
 import ErrorElementPage from "../Components/ErrorPage/ErrorElementPage";
+import AboutPage from "../Pages/About/AboutPage";
 
 
 export const router = createBrowserRouter([
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
             {
                 path: '/profile',
                 Component: ProfilePage
+            },
+            {
+                path: '/about-us',
+                Component: AboutPage
             },
             {
                 path: '/settings',

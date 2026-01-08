@@ -1,63 +1,82 @@
-
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
-import { useEffect, useState } from "react";
-import { Link } from "react-router";
-
+import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Autoplay, Pagination } from "swiper/modules";
+import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 export default function Banner() {
     const [books, setBooks] = useState([]);
-    // console.log(books)
+    console.log(books)
+    const axiosSecure = useAxiosSecure();
+
     useEffect(() => {
-        fetch("/data.json")
-            .then(res => res.json())
-            .then(data => setBooks(data))
-    }, [])
+        const getData = async () => {
+            try {
+                const res = await axiosSecure('/books?latest=true');
+                setBooks(res.data || []);
+            } catch (error) {
+                console.error("Banner books load error:", error);
+            }
+        };
+        getData();
+    }, [axiosSecure]);
+
     return (
-        <div className="my-5">
-            <Swiper
-                loop={true}
-                grabCursor={true}
-                pagination={{ clickable: true }}
-                autoplay={{
-                    delay: 2000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: false,
-                }}
-                modules={[Autoplay, Pagination]}
-                breakpoints={{
-                    0: {
-                        slidesPerView: 1,
-                        spaceBetween: 10,
-                    },
-                    540: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                    },
-                }}
-            >
-                {
-                    books.map(book => <SwiperSlide key={book.id}>
-                        <div className='p-5 w-full bg-[#F0FDF4]  h-[470px] dark:bg-[#121F5E] rounded-lg flex flex-col'>
-                            <img className='w-full h-[250px] rounded-lg object-cover' src={book.bookUrl} alt="" />
-                            <h2 className='text-xl font-semibold my-1 dark:text-white'>{book.bookName}</h2>
-                            <h4 className=' my-2 flex-grow overflow-hidden dark:text-white'>{book.description}</h4>
 
-                            <Link to='/books' className='btn bg-[#23BE0A] text-white w-full py-2 mt-3 rounded-lg'>All Books</Link>
+        <section className="relative w-full h-[75vh]">
+            {books.length > 0 && (
+                <Swiper
+                    key={books.length}
+                    modules={[Navigation, Pagination, Autoplay]}
+                    navigation
+                    pagination={{ clickable: true }}
+                    loop={books.length > 1}
+                    autoplay={
+                        books.length > 1
+                            ? {
+                                delay: 3000,
+                                disableOnInteraction: false,
+                                pauseOnMouseEnter: false,
+                            }
+                            : false
+                    }
+                    className="w-full h-full"
+                >
+                    {books.map((book) => (
+                        <SwiperSlide key={book._id}>
+                            {/* Background Image */}
+                            <img
+                                src={book.bookUrl}
+                                alt={book.bookName}
+                                className="w-full h-full object-cover"
+                            />
 
-                        </div>
-                    </SwiperSlide>)
-                }
-            </Swiper>
-        </div>
+                            {/* Overlay */}
+                            <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white px-4">
+                                <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold">
+                                    {book.bookName}
+                                </h1>
+
+                                <p className="mt-3 max-w-2xl text-sm sm:text-base md:text-xl line-clamp-2">
+                                    {book.description}
+                                </p>
+
+                                {/* Button */}
+                                <Link
+                                    to="/books"
+                                    className="mt-5 inline-block px-6 py-2 bg-[#23BE0A] hover:bg-green-600 transition rounded-lg font-semibold"
+                                >
+                                    All Books
+                                </Link>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            )}
+        </section>
+
     );
 }
-
-

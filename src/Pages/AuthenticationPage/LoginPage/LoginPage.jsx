@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Link, useLocation, useNavigate } from 'react-router'
-import useAuth from '../../../Components/Hooks/useAuth'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useLocation, useNavigate } from 'react-router';
+import useAuth from '../../../Components/Hooks/useAuth';
 import { toast } from 'react-toastify';
 import GoogleLoginPage from '../GoogleLoginPage';
 import { IoMdEyeOff } from 'react-icons/io';
@@ -9,64 +9,94 @@ import { FaEye } from 'react-icons/fa';
 
 export default function LoginPage() {
   const { signinUser } = useAuth();
-  const { register, handleSubmit, formState: { errors }, } = useForm()
-  const [showPassword, setShowPassword] = useState(false)
-  const locaction = useLocation();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogin = (data) => {
-    console.log(data)
     signinUser(data.email, data.password)
       .then(result => {
-        // console.log(result.user)
-
-        // setUser(result.user)
-        navigate(locaction?.state || '/')
-        toast.success('login successfull')
-
+        navigate(location?.state?.from || '/');
+        toast.success('Login successful!');
       })
       .catch(error => {
-        console.log("Register Error:", error.message);
         toast.error(error.message);
       });
-  }
+  };
+
   return (
-    <div className="card bg-base-100 w-full max-w-sm mt-5 mx-auto hrink-0 shadow-2xl">
-      <div className="card-body">
-        <h1 className='text-center text-4xl font-bold text-black mt-5'>Welcome Back</h1>
-        <p className='text-center text-black'>Login with Book Courier</p>
-        <form onSubmit={handleSubmit(handleLogin)}>
-          <fieldset className="fieldset">
-            {/* email */}
-            <label className="label font-semibold text-black">Email</label>
-            <input type="email" className="input" {...register('email', { required: true })} placeholder="Email" />
-            {errors.email?.type === "required" && <p className='text-red-500'>Email is required.</p>
-            }
-            {/* password */}
-            <label className="label font-semibold text-black">Password</label>
-            <div className='relative'>
-              <input type={showPassword ? "text" : "password"} className="input" {...register('password', {
-                required: true, pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{6,}$/
-              })} placeholder="Password" />
-              <button type='button' onClick={() => setShowPassword(!showPassword)} className="text-xl absolute right-5 top-2 z-50">{
-                showPassword ? <IoMdEyeOff /> : <FaEye />}</button>
-            </div>
-            {
-              errors.password?.type === "required" && <p className='text-red-500'>password is required.</p>
-            }
-            {/* {
-              errors.password?.type === "minLength" && <p className='text-red-500'>password must be 6 characters or longer.</p>
-            } */}
-            {
-              errors.password?.type === "pattern" && <p className='text-red-500'>Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, and one special character.</p>
-            }
-            {/* button */}
-            <button className="btn bg-[#23BE0A] text-white px-3 rounded-lg">Login</button>
-          </fieldset>
+    <div className="min-h-screen flex items-center justify-center bg-[#F0F4F8] dark:bg-[#121F5E] px-2">
+      <div className="card bg-white dark:bg-[#1E2A5B] w-full max-w-md shadow-2xl rounded-xl p-6 sm:p-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center text-black dark:text-white mb-2">
+          Welcome Back
+        </h1>
+        <p className="text-center text-gray-700 dark:text-gray-300 mb-6">
+          Login with Book Courier
+        </p>
+
+        <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col gap-4">
+          {/* Email */}
+          <div className="flex flex-col">
+            <label className="label font-semibold text-black dark:text-white">Email</label>
+            <input
+              type="email"
+              className="input w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-[#2A3A5B] text-black dark:text-white focus:ring-2 focus:ring-[#23BE0A] outline-none"
+              {...register('email', { required: true })}
+              placeholder="Email"
+            />
+            {errors.email && <p className='text-red-500 mt-1'>Email is required.</p>}
+          </div>
+
+          {/* Password */}
+          <div className="flex flex-col relative">
+            <label className="label font-semibold text-black dark:text-white">Password</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              className="input w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-[#2A3A5B] text-black dark:text-white focus:ring-2 focus:ring-[#23BE0A] outline-none"
+              {...register('password', {
+                required: true,
+                pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{6,}$/
+              })}
+              placeholder="Password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-8 text-xl text-gray-600 dark:text-gray-300"
+            >
+              {showPassword ? <IoMdEyeOff /> : <FaEye />}
+            </button>
+            {errors.password?.type === "required" && <p className='text-red-500 mt-1'>Password is required.</p>}
+            {errors.password?.type === "pattern" && (
+              <p className='text-red-500 mt-1'>
+                Password must be at least 6 characters long and include one uppercase, one lowercase, and one special character.
+              </p>
+            )}
+          </div>
+
+          {/* Login Button */}
+          <button
+            type="submit"
+            className="btn w-full bg-[#23BE0A] hover:bg-[#1FA501] rounded-lg text-white font-semibold mt-2"
+          >
+            Login
+          </button>
         </form>
-        <GoogleLoginPage></GoogleLoginPage>
-        <h1>Already have an account?<Link state={location.state} to='/register' className='text-red-500 underline'>Register</Link></h1>
+
+        {/* Google Login */}
+        <div className="my-4">
+          <GoogleLoginPage />
+        </div>
+
+        {/* Register Link */}
+        <p className="text-center text-gray-700 dark:text-gray-300 mt-4">
+          Don't have an account?{' '}
+          <Link state={location.state} to='/register' className='text-[#23BE0A] dark:text-[#00FF7F] underline'>
+            Register
+          </Link>
+        </p>
       </div>
     </div>
-  )
+  );
 }

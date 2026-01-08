@@ -1,66 +1,88 @@
 import React, { useContext } from 'react';
-
 import { toast } from 'react-toastify';
-import defaultUserImg from '../../assets/user.png'
+import defaultUserImg from '../../assets/user.png';
 import { AuthContext } from '../Contexts/AuthContext';
-// import { useContext } from 'react';
 
 const ProfilePage = () => {
-    const { user, setUser, updateUserProfile } = useContext(AuthContext)
-    console.log(user?.displayName)
-    console.log(user?.photoURL)
+  const { user, setUser, updateUserProfile } = useContext(AuthContext);
 
-    const handleUpdateUser = (event) => {
-        event.preventDefault();
-        const name = event.target.name.value;
-        const image = event.target.image.value;
+  const handleUpdateUser = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value.trim();
+    const image = event.target.image.value.trim();
 
+    if (!name) return toast.error('Name cannot be empty');
 
-        updateUserProfile({ displayName: name, photoURL: image })
-            .then(() => {
-                // UpdateProfile
-                setUser({ ...user, displayName: name, photoURL: image });
-                toast.success('Profile Update success')
-                event.target.reset();
-            })
-            .catch(err => {
-                toast.error(err.message)
-            })
+    updateUserProfile({ displayName: name, photoURL: image })
+      .then(() => {
+        setUser({ ...user, displayName: name, photoURL: image });
+        toast.success('Profile updated successfully!');
+      })
+      .catch(err => {
+        toast.error(err.message);
+      });
+  };
 
-    }
-
-
-    if (!user) {
-        return <div className='w-full mx-auto  h-screen flex items-center bg-[#CFF0DC]'>
-            <div className='bg-[#CDADA8] w-[400px] p-5 flex flex-col justify-center items-center rounded-lg mx-auto'>
-                <img className=' w-[150px] h-[150px] rounded-full' src={defaultUserImg} alt="" />
-                <h2 className='text-xl font-semibold mt-2'>No have an account</h2>
-
-            </div>
-        </div>
-    }
-
+  if (!user) {
     return (
-        <div className='w-full mx-auto h-screen flex items-center bg-[#CFF0DC]'>
-            <div className='bg-[#CDADA8] w-[400px] p-5 flex flex-col justify-center items-center rounded-lg mx-auto'>
-                <img className=' w-[150px] h-[150px] rounded-full' src={user.photoURL ? user.photoURL : defaultUserImg} alt="" />
-                <h2 className='text-xl font-semibold mt-2'>{user.displayName}</h2>
-                <p>{user.email}</p>
-
-                <form onSubmit={handleUpdateUser}>
-                    {/* Name */}
-                    <label className="label text-black font-semibold pl-1">Name</label>
-                    <input type="text" name='name' defaultValue={user?.displayName} className="input text-[#D9D9D9] w-full outline-none focus:ring-2 focus:ring-[#02A53B] focus:border-none " placeholder="Name" />
-                    {/* image url */}
-
-                    <label className="label pl-1 text-black font-semibold">URL</label>
-                    <input type="url" name='image' defaultValue={user?.photoURL} className="input w-full text-[#D9D9D9]  outline-none focus:ring-2 focus:ring-[#02A53B] focus:border-none " placeholder="Image Url" />
-
-                    <button className="btn btn-neutral font-semibold border-none w-full bg-[#02A53B] hover:bg-[#15803D] mt-4">update Profile</button>
-                </form>
-            </div>
+      <div className='w-full h-screen flex items-center justify-center bg-[#F0F4F8] dark:bg-[#121F5E]'>
+        <div className='bg-white dark:bg-[#1E2A5B] w-11/12 sm:w-[400px] p-5 flex flex-col justify-center items-center rounded-lg shadow-md'>
+          <img className='w-32 h-32 rounded-full object-cover' src={defaultUserImg} alt="Default User" />
+          <h2 className='text-xl font-semibold mt-2 text-black dark:text-white'>No account logged in</h2>
         </div>
+      </div>
     );
+  }
+
+  return (
+    <div className='w-full min-h-screen flex items-center justify-center bg-[#F0F4F8] dark:bg-[#121F5E] py-10 px-2'>
+      <div className='bg-white dark:bg-[#1E2A5B] w-full max-w-md p-6 sm:p-8 flex flex-col justify-center items-center rounded-xl shadow-lg'>
+        {/* Avatar */}
+        <img
+          className='w-32 h-32 rounded-full object-cover border-2 border-green-500 dark:border-[#23BE0A]'
+          src={user.photoURL || defaultUserImg}
+          alt="User Avatar"
+        />
+        <h2 className='text-2xl font-bold mt-3 text-black dark:text-white'>{user.displayName}</h2>
+        <p className='text-sm text-gray-700 dark:text-gray-300'>{user.email}</p>
+
+        {/* Form */}
+        <form onSubmit={handleUpdateUser} className="w-full mt-5 flex flex-col gap-4">
+          {/* Name */}
+          <div>
+            <label className="label text-black dark:text-white font-semibold">Name</label>
+            <input
+              type="text"
+              name='name'
+              defaultValue={user.displayName || ''}
+              className="input w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-[#2A3A5B] text-black dark:text-white focus:ring-2 focus:ring-[#23BE0A] outline-none"
+              placeholder="Name"
+            />
+          </div>
+
+          {/* Image URL */}
+          <div>
+            <label className="label text-black dark:text-white font-semibold">Image URL</label>
+            <input
+              type="url"
+              name='image'
+              defaultValue={user.photoURL || ''}
+              className="input w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-[#2A3A5B] text-black dark:text-white focus:ring-2 focus:ring-[#23BE0A] outline-none"
+              placeholder="Image URL"
+            />
+          </div>
+
+          {/* Update Button */}
+          <button
+            type="submit"
+            className="btn w-full bg-[#23BE0A] hover:bg-[#1FA501] text-white font-semibold mt-2"
+          >
+            Update Profile
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default ProfilePage;
