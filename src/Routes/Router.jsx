@@ -19,16 +19,20 @@ import ApproveLibrarian from "../Pages/DashboardPage/LibrarianDashboard/ApproveL
 import UsersManagement from "../Pages/DashboardPage/UsersManagement";
 import AdminRoute from "./AdminRoute";
 import AdminAndLibrarianRoute from "./AdminAndLibrarianRoute";
-import Profile from "../Components/Profile/Profile";
 import MyWishlistsPage from "../Pages/DashboardPage/MyWishlistsPage";
 import MyBooksPage from "../Pages/DashboardPage/LibrarianDashboard/MyBooksPage";
 import UpdateBookPage from "../Pages/DashboardPage/LibrarianDashboard/UpdateBookPage";
+import ProfilePage from "../Components/Profile/ProfilePage";
+import Setting from "../Components/Setting/Setting";
+import ErrorPage404 from "../Components/ErrorPage/ErrorPage404";
+import ErrorElementPage from "../Components/ErrorPage/ErrorElementPage";
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
+        errorElement: <ErrorElementPage></ErrorElementPage>,
         children: [
             {
                 index: true,
@@ -58,14 +62,32 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/profile',
-                Component: Profile
+                Component: ProfilePage
+            },
+            {
+                path: '/settings',
+                Component: Setting
             },
             {
                 path: '/book/details/:id',
                 element: <PrivateRoute>
                     <BookDetailsPage></BookDetailsPage>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`https://book-courier-server-black.vercel.app/books/${params.id}`)
+                loader: async ({ params }) => {
+                    const res = await fetch(
+                        `https://book-courier-server-black.vercel.app/books/${params.id}`
+                    );
+
+                    if (!res.ok) {
+                        throw new Response("Book Not Found", {
+                            status: 404,
+                            statusText: "Not Found",
+                        });
+                    }
+
+                    return res.json();
+                },
+                errorElement: <ErrorElementPage></ErrorElementPage>
             },
         ]
     },
@@ -118,4 +140,8 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: '*',
+        Component: ErrorPage404
+    }
 ]);

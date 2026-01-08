@@ -12,7 +12,6 @@ export default function ApproveLibrarian() {
         queryKey: ['librarians', 'pending'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/librarians`)
-            // console.log(librarians)
             return res.data
         }
     })
@@ -24,14 +23,13 @@ export default function ApproveLibrarian() {
                 if (res.data.modifiedCount) {
                     refetch();
                     Swal.fire({
-                        title: `Librarian Status is set of ${status}. `,
+                        title: `Librarian Status is set of ${status}.`,
                         showConfirmButton: false,
                         icon: "success",
                         timer: 2000
                     });
                 }
             })
-
     }
 
     const handleApproval = (librarian) => {
@@ -43,48 +41,50 @@ export default function ApproveLibrarian() {
     }
 
   return (
-     <div>
-            <h1 className='text-5xl'>Librarians Pending Approval:{librarians.length}</h1>
+     <div className="p-4 md:p-8"> 
+        <h1 className='text-2xl md:text-5xl font-bold mb-4'>Librarians Pending Approval: {librarians.length}</h1> 
 
-            <div className="overflow-x-auto">
-                <table className="table table-zebra">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th>SL.</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            {/* <th>Role</th> */}
-                            <th>Status</th>
-                            <th>createAt</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            librarians.map((librarian, index) => <tr key={librarian._id}>
-                                <th>{index + 1}</th>
-                                <td>{librarian.name}</td>
-                                <td>{librarian.email}</td>
-                                {/* <td>{librarian.role}</td> */}
-                                <td>
-                                    <p className={`${librarian.status === 'approved' ? 'text-green-400' : 'text-red-500'}`}>  {librarian.status}</p>
+        <div className="overflow-x-auto"> 
+            <table className="table table-zebra w-full min-w-[600px] md:min-w-full"> 
+                <thead>
+                    <tr>
+                        <th className="text-sm md:text-base">SL.</th> 
+                        <th className="text-sm md:text-base">Name</th>
+                        <th className="text-sm md:text-base">Email</th>
+                        <th className="text-sm md:text-base">Status</th>
+                        <th className="text-sm md:text-base">createAt</th>
+                        <th className="text-sm md:text-base">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        librarians.map((librarian, index) => <tr key={librarian._id} className="text-sm md:text-base"> 
+                            <th>{index + 1}</th>
+                            <td>{librarian.name}</td>
+                            <td>{librarian.email}</td>
+                            <td>
+                                <p className={`${librarian.status === 'approved' ? 'text-green-400 font-medium' : 'text-red-500 font-medium'}`}>
+                                    {librarian.status}
+                                </p>
+                            </td>
+                            <td>{librarian.createAt}</td>
+                            <td className="flex flex-col md:flex-row gap-2"> 
+                                <button onClick={() => handleApproval(librarian)} className="btn bg-green-500 text-black w-full md:w-auto flex items-center justify-center gap-1"> 
+                                    <FaUserCheck /> Approve
+                                </button>
+                                <button onClick={() => handleRejection(librarian)} className="btn bg-yellow-500 text-black w-full md:w-auto flex items-center justify-center gap-1">
+                                    <IoPersonRemoveSharp /> Remove
+                                </button>
+                                <button className="btn bg-red-500 text-black w-full md:w-auto flex items-center justify-center gap-1">
+                                    <FaTrash /> Delete
+                                </button>
+                            </td>
+                        </tr>)
+                    }
 
-
-                                </td>
-                                <td>{librarian.createAt}</td>
-                                <td>
-                                    <button onClick={() => handleApproval(librarian)} className="btn bg-green-500 text-black"> <FaUserCheck />Approve</button>
-                                    <button onClick={() => handleRejection(librarian)} className="btn bg-yellow-500 text-black mx-2"> <IoPersonRemoveSharp />Remove</button>
-                                    <button className="btn bg-red-500 text-black"> <FaTrash/> Delete</button>
-                                </td>
-                              
-                            </tr>)
-                        }
-
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
+    </div>
   )
 }

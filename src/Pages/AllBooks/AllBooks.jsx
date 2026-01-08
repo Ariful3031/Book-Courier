@@ -171,13 +171,13 @@ export default function AllBooks() {
           <button
             // className="btn btn-primary inline-block p-2  hover:sc+ale-105  transition"
             onClick={applyFilters}
-            className="btn btn-primary inline-block px-4  hover:scale-105  transition"
+            className="btn bg-green-500 inline-block px-4 border-none rounded-xl text-black  hover:scale-105  transition"
           >
             Apply Filters
           </button>
           <button
             onClick={handleReset}
-            className="btn bg-blue-800 text-white inline-block px-4 rounded-xl hover:scale-105 transition"
+            className="btn bg-green-500 inline-block border-none text-black px-4 rounded-xl hover:scale-105 transition"
           >
             Reset Filter
           </button>

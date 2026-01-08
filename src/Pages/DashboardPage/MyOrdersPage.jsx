@@ -2,11 +2,8 @@ import React from 'react'
 import useAuth from '../../Components/Hooks/useAuth'
 import useAxiosSecure from '../../Components/Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-// import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { useQueryClient } from '@tanstack/react-query';
-
-
 
 export default function MyOrdersPage() {
   const { user } = useAuth();
@@ -20,8 +17,6 @@ export default function MyOrdersPage() {
       return res.data;
     }
   })
-
-
 
   const handleCancel = async (order) => {
     if (order.paymentStatus === 'paid') {
@@ -48,10 +43,6 @@ export default function MyOrdersPage() {
     } catch (err) {
       Swal.fire('Error', err.response?.data?.message || 'Something went wrong', 'error');
     }
-
-
-
-
   }
 
   const handlePayment = async (order) => {
@@ -64,61 +55,59 @@ export default function MyOrdersPage() {
 
     const res = await axiosSecure.post('payment-checkout-session', paymentInfo)
     window.location.assign(res.data.url);
-    // window.location.href = res.data.url;
-    // console.log(res.data)
-
   }
-  // console.log(orders)
-  return (
-    <div>
-      <h1>All my orders: {orders.length}</h1>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          {/* head */}
+  return (
+    <div className="p-4 md:p-8"> 
+      <h1 className="text-xl md:text-3xl font-bold mb-4">All my orders: {orders.length}</h1> 
+
+      <div className="overflow-x-auto"> 
+        <table className="table table-zebra w-full min-w-[600px] md:min-w-full"> 
           <thead>
             <tr>
-              <th>SL.</th>
-              <th>Book Name</th>
-              <th>Order date</th>
-              <th>Payment Status</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th className="text-sm md:text-base">SL.</th> 
+              <th className="text-sm md:text-base">Book Name</th>
+              <th className="text-sm md:text-base">Order date</th>
+              <th className="text-sm md:text-base">Payment Status</th>
+              <th className="text-sm md:text-base">Status</th>
+              <th className="text-sm md:text-base">Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {
-              orders.map((order, index) => <tr key={order._id}>
+              orders.map((order, index) => <tr key={order._id} className="text-sm md:text-base">
                 <th>{index + 1}</th>
                 <td>{order.bookTitle}</td>
                 <td>{order.orderDate}</td>
                 <td>
-                  {
-                    order.paymentStatus === 'paid' ? <span className='text-green-500'>Paid </span> : <span className='text-red-500'>Unpaid</span>
-
-                  }
+                  {order.paymentStatus === 'paid' 
+                    ? <span className='text-green-500 font-semibold'>Paid</span> 
+                    : <span className='text-red-500 font-semibold'>Unpaid</span>}
                 </td>
 
                 <td>
-                  <p className={order.status === 'pending' ? 'text-yellow-500' : order.status === 'complete' ? 'text-green-500' : 'text-red-500'}>{order.status}</p>
+                  <p className={
+                    order.status === 'pending' ? 'text-yellow-500 font-medium' :
+                    order.status === 'complete' ? 'text-green-500 font-medium' :
+                    'text-red-500 font-medium'
+                  }>
+                    {order.status}
+                  </p>
                 </td>
-                <td>
+                <td className="flex flex-col md:flex-row gap-2"> 
                   {order.paymentStatus !== 'paid' && order.status !== 'canceled' && (
                     <button
                       onClick={() => handlePayment(order)}
-                      className='btn bg-green-500 text-white'
+                      className='btn bg-green-500 text-white w-full md:w-auto' 
                     >
                       Pay now
                     </button>
                   )}
-                  {/* <button onClick={() => handleCancel(order)} className='btn bg-red-500 ml-2 text-white'>
-                    cancel
-                  </button> */}
                   {order.status !== 'canceled' && (
                     <button
                       onClick={() => handleCancel(order)}
-                      className='btn bg-red-500 ml-2 text-white'
+                      className='btn bg-red-500 text-white w-full md:w-auto' 
                     >
                       Cancel
                     </button>
@@ -126,8 +115,6 @@ export default function MyOrdersPage() {
                 </td>
               </tr>)
             }
-
-
           </tbody>
         </table>
       </div>

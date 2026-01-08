@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from "react-router";
-import logoImg from '../../assets/screen book logo.png'
+import logoImg from '../../assets/screen-book-logo.png'
 import useAuth from '../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import useRole from '../Hooks/useRole';

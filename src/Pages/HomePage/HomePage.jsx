@@ -3,6 +3,7 @@ import Banner from './Banner'
 import LatestBook from './LatestBook'
 import Coverage from './Coverage'
 import WhyChooseUs from './WhyChooseUs'
+import BookOfTheWeek from './BookOfTheWeek'
 
 export default function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default function HomePage() {
       <Banner></Banner>
       <LatestBook></LatestBook>
       <Coverage></Coverage>
+      <BookOfTheWeek></BookOfTheWeek>
       <WhyChooseUs></WhyChooseUs>
     </div>
   )

@@ -39,7 +39,7 @@ export default function DashboardLayout() {
               </Link>
             </li>
 
-            {/* our dashboard link  */}
+            {/* users dashboard link  */}
             {/* My orders Link */}
             <li>
               <Link to='/dashboard/my-orders' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Orders">
@@ -62,12 +62,17 @@ export default function DashboardLayout() {
               </Link>
             </li>
             {/* My books Link */}
-            <li>
+           
+            {
+              role.role==='librarian'&&<>
+               <li>
               <Link to='/dashboard/my-books' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Books">
                 <FaBook />
                 <span className="is-drawer-close:hidden">My Books</span>
               </Link>
             </li>
+              </>
+            }
 
             {
               role.role === 'admin' && <>

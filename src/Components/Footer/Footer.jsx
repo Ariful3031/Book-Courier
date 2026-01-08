@@ -1,6 +1,6 @@
 
 import React from 'react'
-import logoImg from '../../assets/screen book logo.png'
+import logoImg from '../../assets/screen-book-logo.png'
 import { FaSquareXTwitter } from 'react-icons/fa6'
 import { FaFacebook, FaGithub, FaInstagramSquare } from 'react-icons/fa'
 import { Link } from 'react-router'
@@ -24,13 +24,6 @@ export default function Footer() {
           <Link to='/login' className="link link-hover">Login</Link>
           <Link to='/register' className="link link-hover">Register</Link>
         </nav>
-        {/* <nav>
-          <h6 className="footer-title">Categories</h6>
-          <a className="link link-hover">Web Development</a>
-          <a className="link link-hover">Multimedia</a>
-          <a className="link link-hover">Design</a>
-          <a className="link link-hover">Marketing</a>
-        </nav> */}
         <nav>
           <h6 className="footer-title">Social Links</h6>
           <div className='flex items-center gap-1'>
@@ -47,7 +40,7 @@ export default function Footer() {
           </div>
           <div className='flex items-center gap-1'>
             <FaGithub />
-            <a className="link link-hover">GitHub</a>
+            <a href='https://github.com/Ariful3031/Book-Courier' className="link link-hover">GitHub</a>
           </div>
 
 
