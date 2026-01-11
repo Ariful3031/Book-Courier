@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import useAxiosSecure from '../../../Components/Hooks/useAxiosSecure'
 import { useForm } from 'react-hook-form';
-import useAuth from '../../../Components/Hooks/useAuth';
 import { useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 
 export default function UpdateBookPage() {
-    // const { user } = useAuth()
     const axiosSecure = useAxiosSecure();
     const { register, handleSubmit, reset } = useForm()
     const [book, setBook] = useState([])
-    // console.log(book)
-
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`https://book-courier-server-black.vercel.app/books/${id}`, {
-
-        })
+        fetch(`https://book-courier-server-black.vercel.app/books/${id}`)
             .then(res => res.json())
             .then(data => {
                 setBook(data)
@@ -26,13 +20,10 @@ export default function UpdateBookPage() {
                     category: data.category,
                     publishStatus: data.publishStatus,
                 });
-
             })
-    }, [id])
+    }, [id, reset])
 
     const handleUpdateBook = (data) => {
-        console.log(data)
-
         Swal.fire({
             title: "Are you sure?",
             text: `To Update Your Book!`,
@@ -45,10 +36,9 @@ export default function UpdateBookPage() {
             if (result.isConfirmed) {
                 axiosSecure.patch(`/books/${id}`, data)
                     .then(res => {
-                        // console.log(res.data)
                         if (res.data.modifiedCount) {
                             Swal.fire({
-                                title: `Your book successfully Update !`,
+                                title: `Your book successfully Updated!`,
                                 showConfirmButton: false,
                                 icon: "success",
                                 timer: 2000
@@ -56,46 +46,37 @@ export default function UpdateBookPage() {
                         }
                     })
                     .catch(err => {
-                        toast.error(err)
+                        toast.error(err.message);
                     })
-
             }
         });
-
-
-        // console.log(udateData)
     }
 
-
     return (
-        <div className='px-10'>
+        <div className='p-5 md:px-10 dark:bg-gray-900 min-h-screen'>
 
-            <h1 className='text-4xl font-bold my-5 dark:text-white text-black text-center'>Update Your Book</h1>
+            <h1 className='text-3xl md:text-4xl font-bold my-5 text-center text-black dark:text-white'>Update Your Book</h1>
 
-            <form className='dark:bg-white px-8 py-5' onSubmit={handleSubmit(handleUpdateBook)}>
+            <form
+                className='bg-white dark:bg-gray-800 p-5 md:p-8 rounded-lg shadow-lg'
+                onSubmit={handleSubmit(handleUpdateBook)}
+            >
                 <fieldset className="fieldset">
-                    <div className='grid grid-cols-2 gap-10'>
-                        {/* leftSide */}
-                        <div className='flex flex-col'>
-                            {/* Book Name */}
-                            <label className="label font-semibold text-black mt-2 text-xl">Book Name</label>
-                            <input type="text" defaultValue={book.bookName} className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1" {...register('bookName')} placeholder="Type book name" />
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
 
-                            {/* book Photo/ Image  */}
-                            <label className="label font-semibold text-black mt-2 text-xl">Book Photo Url</label>
-                            <input type="url" defaultValue={book.bookUrl} className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1" {...register('bookUrl')} placeholder="Type book image url" />
+                        {/* Left Side */}
+                        <div className='flex flex-col gap-3'>
+                            <label className="label font-semibold text-black dark:text-white">Book Name</label>
+                            <input type="text" defaultValue={book.bookName} className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('bookName')} placeholder="Book Name" />
 
+                            <label className="label font-semibold text-black dark:text-white">Book Photo URL</label>
+                            <input type="url" defaultValue={book.bookUrl} className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('bookUrl')} placeholder="Book Image URL" />
 
-                            {/* email */}
-                            <label className="label font-semibold text-black mt-2 text-xl">Email</label>
-                            <input type="email" defaultValue={book.email} readOnly className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1" {...register('email')} placeholder="Email" />
+                            <label className="label font-semibold text-black dark:text-white">Email</label>
+                            <input type="email" defaultValue={book.email} readOnly className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('email')} placeholder="Email" />
 
-                            {/* Category */}
-                            <label className="label text-black font-semibold mt-2 text-xl">Category</label>
-                            <select
-                                {...register('category')}
-                                className="select w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1"
-                            >
+                            <label className="label font-semibold text-black dark:text-white">Category</label>
+                            <select {...register('category')} className="select w-full dark:bg-gray-700 dark:text-white dark:border-gray-600">
                                 <option value="" disabled>Pick a Category</option>
                                 <option value="Fiction">Fiction</option>
                                 <option value="Fantasy">Fantasy</option>
@@ -110,52 +91,45 @@ export default function UpdateBookPage() {
                                 <option value="Science Fiction">Science Fiction</option>
                             </select>
 
-                            {/* Language */}
-                            <label className="label font-semibold text-black mt-2 text-xl">Language</label>
-                            <input type="text" defaultValue={book.language} className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1" {...register('language')} placeholder="Type book Language" />
-
-
+                            <label className="label font-semibold text-black dark:text-white">Language</label>
+                            <input type="text" defaultValue={book.language} className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('language')} placeholder="Language" />
                         </div>
 
+                        {/* Right Side */}
+                        <div className='flex flex-col gap-3'>
+                            <label className="label font-semibold text-black dark:text-white">Writer Name</label>
+                            <input type="text" defaultValue={book.writerName} className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('writerName')} placeholder="Writer Name" />
 
-                        {/* right side */}
-                        <div className='flex flex-col'>
-                            {/* Writer Name */}
-                            <label className="label font-semibold text-black mt-2 text-xl">Writer Name</label>
-                            <input type="text" defaultValue={book.writerName} className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1" {...register('writerName')} placeholder="Type writer name" />
+                            <label className="label font-semibold text-black dark:text-white">Writer Photo URL</label>
+                            <input type="url" defaultValue={book.writerUrl} className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('writerUrl')} placeholder="Writer Image URL" />
 
+                            <label className="label font-semibold text-black dark:text-white">Price</label>
+                            <input type="number" defaultValue={book.price} className="input w-full dark:bg-gray-700 dark:text-white dark:border-gray-600" {...register('price')} placeholder="Price" />
 
-                            {/*writer  Photo/ Image  */}
-                            <label className="label font-semibold text-black mt-2 text-xl">Writer Photo Url</label>
-                            <input type="url" defaultValue={book.writerUrl} className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1" {...register('writerUrl')} placeholder="Type writer image url" />
-
-                            {/* Price */}
-                            <label className="label font-semibold text-black mt-2 text-xl">Price</label>
-                            <input type="number" defaultValue={book.price} className="input w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1" {...register('price')} placeholder="Type price" />
-
-
-                            {/* Status */}
-                            <label className="label text-black font-semibold mt-2 text-xl">Status</label>
-                            <select
-                                {...register('publishStatus')}
-                                className="select w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1"
-                            >
+                            <label className="label font-semibold text-black dark:text-white">Status</label>
+                            <select {...register('publishStatus')} className="select w-full dark:bg-gray-700 dark:text-white dark:border-gray-600">
                                 <option value="" disabled>Pick a Status</option>
                                 <option value="Unpublished">Unpublished</option>
                                 <option value="Published">Published</option>
-
                             </select>
-
                         </div>
                     </div>
 
-                    {/* description */}
-                    <label className="label font-semibold text-black mt-2 text-xl">Description</label>
-                    <textarea defaultValue={book.description} className="textarea textarea-bordered w-full dark:bg-white dark:text-black dark:border-2 dark:border-gray-200 mt-1" rows={3} {...register('description')} placeholder="Type book description" />
-
+                    {/* Description */}
+                    <label className="label font-semibold text-black dark:text-white mt-4">Description</label>
+                    <textarea
+                        defaultValue={book.description}
+                        className="textarea w-full dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                        rows={4}
+                        {...register('description')}
+                        placeholder="Book Description"
+                    />
                 </fieldset>
-                {/* button */}
-                <button className='btn border-none bg-[#23BE0A] text-white px-5 py-2 rounded-lg'>Update  Now</button>
+
+                {/* Submit Button */}
+                <button className='btn mt-5 bg-[#23BE0A] hover:bg-green-600 text-white px-5 py-2 rounded-lg w-full md:w-auto'>
+                    Update Now
+                </button>
             </form>
 
         </div>

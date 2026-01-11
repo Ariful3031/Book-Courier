@@ -71,53 +71,62 @@ export default function MyOrdersPage() {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {orders.map((order, index) => (
-              <tr key={order._id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <th>{index + 1}</th>
-                <td>{order.bookTitle}</td>
-                <td>{order.orderDate}</td>
-                <td>
-                  {order.paymentStatus === 'paid' ? (
-                    <span className="text-green-500 font-semibold">Paid</span>
-                  ) : (
-                    <span className="text-red-500 font-semibold">Unpaid</span>
-                  )}
-                </td>
-                <td>
-                  <p
-                    className={
-                      order.status === 'pending'
-                        ? 'text-yellow-500 font-medium'
-                        : order.status === 'complete'
-                          ? 'text-green-500 font-medium'
-                          : 'text-red-500 font-medium'
-                    }
-                  >
-                    {order.status}
-                  </p>
-                </td>
-                <td className="flex flex-col md:flex-row gap-2">
-                  {order.paymentStatus !== 'paid' && order.status !== 'canceled' && (
-                    <button
-                      onClick={() => handlePayment(order)}
-                      className="btn bg-green-500 text-white w-full md:w-auto hover:bg-green-600 transition-colors"
+          {orders.length === 0 ? (
+            <p className="text-center text-gray-500 dark:text-gray-300 my-10 text-xl">
+              No orders found!
+            </p>
+          ) : (
+            <tbody>
+
+              {orders.map((order, index) => (
+
+                <tr key={order._id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                  <th>{index + 1}</th>
+                  <td>{order.bookTitle}</td>
+                  <td>{order.orderDate}</td>
+                  <td>
+                    {order.paymentStatus === 'paid' ? (
+                      <span className="text-green-500 font-semibold">Paid</span>
+                    ) : (
+                      <span className="text-red-500 font-semibold">Unpaid</span>
+                    )}
+                  </td>
+                  <td>
+                    <p
+                      className={
+                        order.status === 'pending'
+                          ? 'text-yellow-500 font-medium'
+                          : order.status === 'complete'
+                            ? 'text-green-500 font-medium'
+                            : 'text-red-500 font-medium'
+                      }
                     >
-                      Pay Now
-                    </button>
-                  )}
-                  {order.status !== 'canceled' && (
-                    <button
-                      onClick={() => handleCancel(order)}
-                      className="btn bg-red-500 text-white w-full md:w-auto hover:bg-red-600 transition-colors"
-                    >
-                      Cancel
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                      {order.status}
+                    </p>
+                  </td>
+                  <td className="flex flex-col md:flex-row gap-2">
+                    {order.paymentStatus !== 'paid' && order.status !== 'canceled' && (
+                      <button
+                        onClick={() => handlePayment(order)}
+                        className="btn bg-green-500 text-white w-full md:w-auto hover:bg-green-600 transition-colors"
+                      >
+                        Pay Now
+                      </button>
+                    )}
+                    {order.status !== 'canceled' && (
+                      <button
+                        onClick={() => handleCancel(order)}
+                        className="btn bg-red-500 text-white w-full md:w-auto hover:bg-red-600 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
+
         </table>
       </div>
     </div>

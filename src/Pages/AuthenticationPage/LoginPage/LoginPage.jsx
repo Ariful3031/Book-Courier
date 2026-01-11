@@ -25,6 +25,145 @@ export default function LoginPage() {
       });
   };
 
+  const handleDemoUserLogin = () => {
+    const demoEmail = "jannat@gmail.com";
+    const demoPassword = "@#Jannat123";
+
+    signinUser(demoEmail, demoPassword)
+      .then(result => {
+        // console.log(result.user)
+        toast.success("login success")
+        navigate(`${location.state ? location.state : "/"}`)
+
+      })
+      .catch(error => {
+        // console.log(error.message)
+        if (error.code === "auth/email-already-in-use") {
+          toast.error("This email is already registered.");
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Please enter a valid email address.");
+        } else if (error.code === "auth/user-disabled") {
+          toast.error("This account has been disabled.");
+        } else if (error.code === "auth/user-not-found") {
+          toast.error("No account found with this email.");
+        } else if (error.code === "auth/wrong-password") {
+          toast.error("Incorrect password.");
+        } else if (error.code === "auth/weak-password") {
+          toast.error("Password is too weak. Use at least 6 characters, with numbers and symbols.");
+        } else if (error.code === "auth/too-many-requests") {
+          toast.error("Too many attempts. Try again later.");
+        } else if (error.code === "auth/operation-not-allowed") {
+          toast.error("This sign-in method is not enabled.");
+        } else if (error.code === "auth/requires-recent-login") {
+          toast.error("Please login again to perform this action.");
+        } else if (error.code === "auth/invalid-credential") {
+          toast.error("Invalid authentication credential.");
+        } else if (error.code === "auth/credential-already-in-use") {
+          toast.error("This credential is already linked to another account.");
+        } else if (error.code === "auth/account-exists-with-different-credential") {
+          toast.error("An account with this email exists using a different sign-in method.");
+        } else if (error.code === "auth/popup-closed-by-user") {
+          toast.error("Authentication popup closed before completion.");
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error. Check your internet connection.");
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      })
+  }
+  const handleDemoLibrarianLogin = () => {
+    const demoEmail = "booklibraian@gmail.com";
+    const demoPassword = "@#Libraian";
+
+    signinUser(demoEmail, demoPassword)
+      .then(result => {
+        // console.log(result.user)
+        toast.success("login success")
+        navigate(`${location.state ? location.state : "/"}`)
+
+      })
+      .catch(error => {
+        // console.log(error.message)
+        if (error.code === "auth/email-already-in-use") {
+          toast.error("This email is already registered.");
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Please enter a valid email address.");
+        } else if (error.code === "auth/user-disabled") {
+          toast.error("This account has been disabled.");
+        } else if (error.code === "auth/user-not-found") {
+          toast.error("No account found with this email.");
+        } else if (error.code === "auth/wrong-password") {
+          toast.error("Incorrect password.");
+        } else if (error.code === "auth/weak-password") {
+          toast.error("Password is too weak. Use at least 6 characters, with numbers and symbols.");
+        } else if (error.code === "auth/too-many-requests") {
+          toast.error("Too many attempts. Try again later.");
+        } else if (error.code === "auth/operation-not-allowed") {
+          toast.error("This sign-in method is not enabled.");
+        } else if (error.code === "auth/requires-recent-login") {
+          toast.error("Please login again to perform this action.");
+        } else if (error.code === "auth/invalid-credential") {
+          toast.error("Invalid authentication credential.");
+        } else if (error.code === "auth/credential-already-in-use") {
+          toast.error("This credential is already linked to another account.");
+        } else if (error.code === "auth/account-exists-with-different-credential") {
+          toast.error("An account with this email exists using a different sign-in method.");
+        } else if (error.code === "auth/popup-closed-by-user") {
+          toast.error("Authentication popup closed before completion.");
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error. Check your internet connection.");
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      })
+  }
+  const handleDemoAdminLogin = () => {
+    const demoEmail = "khawaja@gmail.com";
+    const demoPassword = "@#Ariful31";
+
+    signinUser(demoEmail, demoPassword)
+      .then(result => {
+        // console.log(result.user)
+        toast.success("login success")
+        navigate(`${location.state ? location.state : "/"}`)
+
+      })
+      .catch(error => {
+        // console.log(error.message)
+        if (error.code === "auth/email-already-in-use") {
+          toast.error("This email is already registered.");
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Please enter a valid email address.");
+        } else if (error.code === "auth/user-disabled") {
+          toast.error("This account has been disabled.");
+        } else if (error.code === "auth/user-not-found") {
+          toast.error("No account found with this email.");
+        } else if (error.code === "auth/wrong-password") {
+          toast.error("Incorrect password.");
+        } else if (error.code === "auth/weak-password") {
+          toast.error("Password is too weak. Use at least 6 characters, with numbers and symbols.");
+        } else if (error.code === "auth/too-many-requests") {
+          toast.error("Too many attempts. Try again later.");
+        } else if (error.code === "auth/operation-not-allowed") {
+          toast.error("This sign-in method is not enabled.");
+        } else if (error.code === "auth/requires-recent-login") {
+          toast.error("Please login again to perform this action.");
+        } else if (error.code === "auth/invalid-credential") {
+          toast.error("Invalid authentication credential.");
+        } else if (error.code === "auth/credential-already-in-use") {
+          toast.error("This credential is already linked to another account.");
+        } else if (error.code === "auth/account-exists-with-different-credential") {
+          toast.error("An account with this email exists using a different sign-in method.");
+        } else if (error.code === "auth/popup-closed-by-user") {
+          toast.error("Authentication popup closed before completion.");
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error. Check your internet connection.");
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      })
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F0F4F8] dark:bg-[#121F5E] px-2">
       <div className="card bg-white dark:bg-[#1E2A5B] w-full max-w-md shadow-2xl rounded-xl p-6 sm:p-8">
@@ -84,10 +223,36 @@ export default function LoginPage() {
           </button>
         </form>
 
+
         {/* Google Login */}
         <div className="my-4">
           <GoogleLoginPage />
         </div>
+
+        {/* demo user button */}
+        <button
+          type="button"
+          onClick={handleDemoUserLogin}
+          className="btn w-full bg-[#23BE0A] hover:bg-[#1FA501] rounded-lg text-white font-semibold mt-2"
+        >
+          Login as Demo User
+        </button>
+        {/* demo librarian button */}
+        <button
+          type="button"
+          onClick={handleDemoLibrarianLogin}
+          className="btn w-full bg-[#23BE0A] hover:bg-[#1FA501] rounded-lg text-white font-semibold mt-2"
+        >
+          Login as Demo Librarian
+        </button>
+        {/* demo Admin button */}
+        <button
+          type="button"
+          onClick={handleDemoAdminLogin}
+          className="btn w-full bg-[#23BE0A] hover:bg-[#1FA501] rounded-lg text-white font-semibold mt-2"
+        >
+          Login as Demo Admin
+        </button>
 
         {/* Register Link */}
         <p className="text-center text-gray-700 dark:text-gray-300 mt-4">

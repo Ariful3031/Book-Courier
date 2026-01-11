@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
           <div className='flex items-center gap-2 mb-1'>
             <FaFacebook className='text-blue-700' />
-            <a href="#" className="link link-hover">Facebook</a>
+            <a href="https://www.facebook.com/share/14U9DnsVWFj/" className="link link-hover">Facebook</a>
           </div>
           <div className='flex items-center gap-2 mb-1'>
             <FaGithub className='text-gray-800 dark:text-gray-100' />

@@ -9,7 +9,6 @@ export default function MyBooksPage() {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-
     const { data: books = [] } = useQuery({
         queryKey: ['myBooks', user?.email],
         queryFn: async () => {
@@ -17,63 +16,58 @@ export default function MyBooksPage() {
             return res.data;
         }
     })
-    // console.log(books)
+
     return (
-        <div>
+        <div className="p-5 dark:bg-gray-900 min-h-screen">
 
-            <h1 className='text-4xl font-bold mt-5 mb-10 dark:text-white  text-black text-center'>My Books : ({books.length})</h1>
+            <h1 className='text-3xl md:text-4xl font-bold mb-8 text-center text-black dark:text-white'>
+                My Books ({books.length})
+            </h1>
 
-            {/* card */}
-
-            <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
+            <div className="overflow-x-auto rounded-lg shadow-lg">
+                <table className="table w-full min-w-[600px] md:min-w-full">
+                    <thead className="bg-gray-200 dark:bg-gray-700 text-black dark:text-white">
                         <tr>
-                            <th>SL</th>
-                            <th>book</th>
-                            <th>Book Name</th>
-                            <th>CreateAt</th>
-                            <th>Update</th>
-
+                            <th className="text-sm md:text-base">SL</th>
+                            <th className="text-sm md:text-base">Book</th>
+                            <th className="text-sm md:text-base">Book Name</th>
+                            <th className="text-sm md:text-base">Created At</th>
+                            <th className="text-sm md:text-base">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+
+                    <tbody className="dark:text-gray-300 text-gray-800">
                         {
-                            books.map((book, index) => <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>
-                                    <div className="flex items-center gap-3">
-                                        <div className="avatar">
-                                            <div className="h-20 w-30 rounded-xl">
+                            books.map((book, index) => (
+                                <tr key={book._id} className="hover:bg-gray-100 dark:hover:bg-gray-800">
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        <div className="flex items-center gap-3">
+                                            <div className="h-20 w-20 rounded-xl overflow-hidden">
                                                 <img
+                                                    className="object-cover w-full h-full"
                                                     src={book.bookUrl}
-                                                    alt="Avatar Tailwind CSS Component" />
+                                                    alt={book.bookName} />
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    {book.bookName}
-                                </td>
-                                <td>{book.createAt}</td>
-
-                                <td>
-                                    <Link to={`/dashboard/update-book/${book._id}`} className='btn bg-green-500'>Update</Link>
-                                </td>
-                            </tr>)
+                                    </td>
+                                    <td className="font-medium dark:text-white">{book.bookName}</td>
+                                    <td>{book.createAt}</td>
+                                    <td>
+                                        <Link
+                                            to={`/dashboard/update-book/${book._id}`}
+                                            className='btn bg-green-500 hover:bg-green-600 text-white'
+                                        >
+                                            Update
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
                         }
-
-
                     </tbody>
-
                 </table>
             </div>
-            {/*  */}
 
         </div>
-
-
-
     )
 }

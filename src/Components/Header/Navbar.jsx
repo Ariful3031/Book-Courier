@@ -28,9 +28,11 @@ export default function Navbar() {
         <li><NavLink className='dark:text-white text-gray-900' to='/'>Home</NavLink></li>
         <li><NavLink className='dark:text-white text-gray-900' to='/books'>Books</NavLink></li>
         <li><NavLink className='dark:text-white text-gray-900' to='/about-us'>About Us</NavLink></li>
+
+        {role.role !== 'librarian' && <li><NavLink className='dark:text-white text-gray-900' to='/be-librarian'>Apply Librarian</NavLink></li>}
         {role.role === 'librarian' && <li><NavLink className='dark:text-white text-gray-900' to='/add-book'>Add A Book</NavLink></li>}
         {user && <>
-            <li><NavLink className='dark:text-white text-gray-900' to='/be-librarian'>Apply Librarian</NavLink></li>
+
             <li><NavLink className='dark:text-white text-gray-900' to='/dashboard/my-orders'>My Dashboard</NavLink></li>
         </>}
     </>
