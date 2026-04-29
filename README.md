@@ -1,23 +1,28 @@
 # Book Courier Service
 
-Book Courier is a responsive web app built with React, Express, MongoDB, and Tailwind CSS, allowing users to browse, filter, and manage property listings securely with login/register functionality. It features category-based search, detailed property information, profile management, and is deployed on Netlify and Vercel for a seamless experience.
+Book Courier is a responsive full-stack web application built with React, Express.js, MongoDB, and Tailwind CSS. It allows users to browse books, place orders, and manage deliveries with a secure login and registration system. The platform includes search and filtering features, order management, and a user dashboard, and is deployed on Firebase and Vercel for a smooth and reliable experience.
 
 ## Features
 
-- **User Authentication**: Secure user authentication system with login/register functionality.
-- **Properties Listings**: Browse through a wide range of flat listings with detailed information about location, price, and amenities.
-- **Search and Filter**: Easily search for properties based on Title, Category, price range, Duration,Featured and more.
-- **Profile Management**: Manage your profile information and preferences to find the best match.
-
+- **Book Ordering System**: Users can easily book select করে order place করতে পারে with delivery details
+- **Authentication & Authorization**: Secure login/register with JWT and role-based access control (RBAC)
+- **Order Management**: Users can track, view, and manage their book orders
+- **Search & Filter**: Easily search books by title, category, and price
+- **Delivery Information**: Users can provide and manage delivery address for smooth courier processing
+- **User Dashboard**: Personalized dashboard to manage profile and orders
+- **Responsive Design**: Mobile, tablet, এবং desktop-এ smooth experience
+- **Fast Deployment**: Hosted on Firebase & Vercel for high performance
 
 ## Technologies Used
 
-- **Frontend**: React.js, 
-- **Backend**: Express.js
-- **Authentication**: JWT (JSON Web Tokens)
+- **Frontend**: React.js, React Router, React Query, Axios, React Hook Form
+- **Backend**: Express.js, Node.js
+- **Authentication**: Firebase, JWT (JSON Web Tokens)
 - **Database**: mongodb
-- **Styling**: Tailwind CSS
-- **Deployment**: Vercel (Backend), firebase (Frontend)
+- **Styling & UIg**: Tailwind CSS, Swiper, React Icons, SweetAlert2, React Toastify
+- **Other Libraries**: React Leaflet, React Responsive Carousel
+- **Tools & Deployment**: Vite, Vercel (Backend), Firebase (Frontend)
+
 
 ## Getting Started
 
@@ -34,25 +39,13 @@ cd Book-Courier
 npm install
 ```
 
-3. Set up environment variables:
-
-Create a `.env` file in the root directory and add the following environment variables:
-
-```
-// Example .env file
-NEXT_PUBLIC_BACKEND_URL=https://flat-sharing-app.vercel.app/api
-NEXT_PUBLIC_LOCAL_URL=http://localhost:5000/api
-NEXT_PUBLIC_IMAGEBB_API_KEY= <your imagebb api key>
-NEXT_PUBLIC_IMAGEBB_API_URL=https://api.imgbb.com/1/upload
-```
-
-4. Start the development server:
+3. Start the development server:
 
 ```
 npm run dev
 ```
 
-5. Open your browser and navigate to `https://book-courier-server-black.vercel.app` to view the application.
+4. Open your browser and navigate to `https://book-courier-server-black.vercel.app` to view the application.
 
 ## User Login Credentials
 
