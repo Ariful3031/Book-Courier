@@ -113,7 +113,7 @@ If you have any questions or feedback regarding Flat Mate Finder, feel free to c
 - **Email**: [hero.ariful31@gmail.com](mailto:hero.ariful31@gmail.com)
 - **Phone**: 01568223031
 - **Social Media**:
-  - [Facebook]()
-  - [Linkedin]()
+  - [Facebook](https://www.facebook.com/arifulislam.badol.716)
+  - [Linkedin](https://www.linkedin.com/in/web-developer-arif/)
 
 We look forward to hearing from you!
